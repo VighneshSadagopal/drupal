@@ -1,0 +1,144 @@
+<?php
+// $Id: lp_switchtheme.module,v 1.2 2009/04/23 22:08:51 munroerichard Exp $
+
+/*
+ * Implementation of hook_form_alter
+ *
+ * Revision information makes no sense for landing pages, so get rid of the
+ * revision section (if any) of the landing pages node form.
+ */
+
+function lp_switchtheme_form_landing_pages_node_form_alter(
+	&$form,
+	$form_state) {	
+
+  $form['switchtheme'] = array(
+  	'#title' => 'Switch Theme',
+  	'#type' => 'fieldset',
+  	'#collapsible' => TRUE,
+  	'#collapsed' => ! (isset($form['#node']->switchtheme) && $form['#node']->switchtheme['switchtheme']),
+  	'#weight' => -200
+  ) ;
+  
+  $xxx = array(
+  	'switchtheme' => t('Switch Theme')
+  ) ;
+  
+  $form['switchtheme']['switchtheme'] = array(
+    '#type' => 'checkboxes',
+    '#description' => t('Check this to have this landing page switch themes'),
+    '#options' => $xxx,
+    '#default_value' => isset($form['#node']->switchtheme) && $form['#node']->switchtheme['switchtheme'] ? array('switchtheme') : array(),
+  );
+  
+	/*
+	 * Put only enabled themes in the list.
+	 */
+	
+  $xxx = list_themes() ;
+  $yyy = $xxx ;
+  
+  foreach ($yyy as $k => $v) {
+  	if ($xxx[$k]->status == 0) {
+  		unset($xxx[$k]) ;
+  	}
+  }
+  
+  $xxx = drupal_map_assoc(array_keys($xxx)) ;
+  
+  $form['switchtheme']['switchtheme_theme'] = array(
+	  '#type' => 'radios',
+	  '#title' => 'Theme',
+	  '#options' => $xxx,
+  	'#default_value' => isset($form['#node']->switchtheme_theme) ? $form['#node']->switchtheme_theme : '',
+  	'#description' => t('Theme to be used by the site after landing on this page'),
+  ) ;
+}
+
+function lp_switchtheme_lp_delete($node) {
+  db_query("DELETE FROM {landing_pages} WHERE nid = %d AND operation = 'switchtheme'", $node->nid);
+
+  db_query("DELETE FROM {landing_pages_switchtheme} WHERE nid = %d", $node->nid);
+}
+
+function lp_switchtheme_lp_insert($node) {
+  if (isset($node->switchtheme) && $node->switchtheme['switchtheme']) {
+  	db_query(
+  		"INSERT INTO {landing_pages} (nid, operation, weight) VALUES (%d, '%s', %d)",
+  		$node->nid,
+  		$node->switchtheme['switchtheme'],
+  		-200) ;
+  		
+  	db_query(
+  		"INSERT INTO {landing_pages_switchtheme} (nid, switchtheme_theme) VALUES (%d, '%s')",
+  		$node->nid,
+  		$node->switchtheme_theme) ;
+  }
+}
+
+function lp_switchtheme_lp_load($node) {
+	$additions = new stdClass() ;
+	
+	$additions = 
+		db_fetch_object(
+			db_query(
+				"SELECT switchtheme_theme FROM {landing_pages_switchtheme} WHERE nid = %d",
+				$node->nid)) ; 
+
+	if ($additions) {
+		$additions->switchtheme['switchtheme'] = 'switchtheme' ;
+	}
+	
+	return $additions ;
+}
+
+function lp_switchtheme_lp_validate(&$node, &$form) {
+	if ($node->switchtheme['switchtheme'])
+	{
+		/*
+		 * Process Switch theme data.
+		 */
+		
+		$valid = FALSE ;
+		
+		if (! (isset($node->switchtheme_theme) && $node->switchtheme_theme)) {
+			form_set_error('switchtheme_theme', "A theme is required") ;
+			$valid = TRUE ;
+		}
+
+		return ! $valid ;
+	}
+
+	return FALSE ;
+}
+
+function lp_switchtheme_lp_update($node) {
+	lp_switchtheme_lp_delete($node) ;
+	lp_switchtheme_lp_insert($node) ;
+}
+
+function lp_switchtheme_lp_validate_referrer() {
+	return TRUE ;
+}
+
+function lp_switchtheme_lp_view($node, $teaser = FALSE, $page = FALSE) {
+	if (isset($node->switchtheme) && $node->switchtheme['switchtheme']) {
+		/*
+		 * Only allow theme switching if the theme is actually enabled.
+		 *
+		 * This can happen when a theme gets disabled and the administrator
+		 * doesn't clean up the landing pages properly.
+		 */
+		
+	  $xxx = list_themes() ;
+	  
+	  if ($xxx[$node->switchtheme_theme]->status == 1) {
+			$_SESSION['custom_theme'] = $node->switchtheme_theme ;
+	  } else {
+	  	unset($_SESSION['custom_theme']) ;
+	  }
+	} else {
+		unset($_SESSION['custom_theme']) ;
+	}
+}
+?>

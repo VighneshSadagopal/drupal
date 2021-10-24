@@ -1,0 +1,179 @@
+<?php
+// $Id: lp_cookie.module,v 1.2 2009/04/23 22:08:51 munroerichard Exp $
+
+/*
+ * Implementation of hook_form_alter
+ *
+ * Revision information makes no sense for landing pages, so get rid of the
+ * revision section (if any) of the landing pages node form.
+ */
+
+function lp_cookie_form_landing_pages_node_form_alter(
+	&$form,
+	$form_state) {
+	
+ 	$form['cookie'] = array(
+  	'#title' => 'Cookie',
+  	'#type' => 'fieldset',
+  	'#collapsible' => TRUE,
+  	'#collapsed' =>  ! (isset($form['#node']->cookie) && $form['#node']->cookie['cookie']),
+  	'#weight' => -900,
+  ) ;
+  
+  // Now we define the form elements specific to our node type.
+  $xxx = array(
+  	'cookie' => t('Emit a cookie')
+  ) ;
+  
+  $form['cookie']['cookie'] = array(
+    '#type' => 'checkboxes',
+    '#description' => t('Check this to have this landing page emit a cookie'),
+    '#options' => $xxx,
+    '#default_value' => isset($form['#node']->cookie) && $form['#node']->cookie['cookie'] ? array('cookie') : array(),
+  );
+  
+  $form['cookie']['cookie_name'] = array(
+  	'#type' => 'textfield',
+  	'#title' => 'Cookie Name',
+  	'#default_value' => isset($form['#node']->cookie_name) ? $form['#node']->cookie_name : '',
+  	'#maxlength' => 32,
+  	'#size' => 32
+  ) ;
+  
+  $form['cookie']['cookie_data'] = array(
+  	'#type' => 'textarea',
+  	'#title' => t('Cookie Data'),
+  	'#description' => t('Data to be stored in cookie'),
+  	'#cols' => 40,
+  	'#rows' => 20,
+  	'#resizable' => FALSE,
+  	'#default_value' => isset($form['#node']->cookie_data) ? $form['#node']->cookie_data : '',
+  ) ;
+  
+  $form['cookie']['cookie_expires'] = array(
+	  '#type' => 'textfield',
+	  '#title' => 'Expires after',
+  	'#default_value' => isset($form['#node']->cookie_expires) ? $form['#node']->cookie_expires : '1800',
+  	'#description' => t('Number of seconds before cookie expires, 0=>expiration at end of session'),
+  	'#maxlength' => 8,
+  	'#size' => 8,
+  ) ;
+  	
+  $form['cookie']['cookie_path'] = array(
+	  '#type' => 'textfield',
+	  '#title' => 'Path',
+  	'#default_value' => isset($form['#node']->cookie_path) ? $form['#node']->cookie_path : '/',
+  	'#description' => t('Site path in which cookie is valid, / => entire site'),
+  	'#maxlength' => 256,
+  	'#size' => 32,
+  ) ;
+  
+  $xxx = explode(':', $_SERVER['HTTP_HOST']) ;
+  
+  $xxx = $xxx[0] ;
+  
+  $xxx = explode('.', $xxx) ;
+  
+  if (count($xxx) > 2) {
+  	$xxx = array_slice($xxx, -2);
+  }
+  
+	$xxx = '.' . implode('.', $xxx) ;
+	
+  $form['cookie']['cookie_domain'] = array(
+	  '#type' => 'textfield',
+	  '#title' => 'Domain',
+  	'#default_value' => isset($form['#node']->cookie_domain) ? $form['#node']->cookie_domain : $xxx,
+  	'#description' => t('Site domain in which cookie is valid, default is all subdomains'),
+  	'#maxlength' => 256,
+  	'#size' => 32,
+  ) ;
+}
+
+function lp_cookie_lp_delete($node) {
+  db_query("DELETE FROM {landing_pages} WHERE nid = %d AND operation = 'cookie'", $node->nid);
+
+  db_query("DELETE FROM {landing_pages_cookie} WHERE nid = %d", $node->nid);
+}
+
+function lp_cookie_lp_insert($node) {
+  if (isset($node->cookie) && $node->cookie['cookie']) {
+  	db_query(
+  		"INSERT INTO {landing_pages} (nid, operation, weight) VALUES (%d, '%s', %d)",
+  		$node->nid,
+  		$node->cookie['cookie'],
+  		-900) ;
+  		
+  	db_query(
+  		"INSERT INTO {landing_pages_cookie} (nid, cookie_name, cookie_data, cookie_path, cookie_expires, cookie_domain) VALUES (%d, '%s', '%s', '%s', %d, '%s')",
+  		$node->nid,
+  		$node->cookie_name,
+  		$node->cookie_data,
+  		$node->cookie_path,
+  		$node->cookie_expires,
+  		$node->cookie_domain
+  	) ;
+  }
+}
+
+function lp_cookie_lp_load($node) {
+	$additions = new stdClass() ;
+	
+	$additions = 
+		db_fetch_object(
+			db_query(
+				"SELECT cookie_name, cookie_data, cookie_expires, cookie_path, cookie_domain FROM {landing_pages_cookie} WHERE nid = %d",
+				$node->nid)) ; 
+
+	if ($additions) {
+		$additions->cookie['cookie'] = 'cookie' ;
+	}
+	
+	return $additions ;
+}
+
+function lp_cookie_lp_update($node) {
+	lp_cookie_lp_delete($node) ;
+	lp_cookie_lp_insert($node) ;
+}
+
+function lp_cookie_lp_validate(&$node, &$form) {
+	if ($node->cookie['cookie'])
+	{
+		/*
+		 * Process cookie data.
+		 */
+		
+		$valid = FALSE ;
+		
+		if (! $node->cookie_name) {
+			form_set_error('cookie_name', "A name is required to emit a cookie") ;
+			$valid = TRUE ;
+		}
+
+		if (! $node->cookie_path) {
+			form_set_error('cookie_path', "A path is required to emit a cookie") ;
+			$valid = TRUE ;
+		}
+
+		if (! $node->cookie_domain) {
+			form_set_error('cookie_domain', "A domain is required to emit a cookie") ;
+			$valid = TRUE ;
+		}
+
+		return ! $valid ;
+	}
+
+	return FALSE ;
+}
+
+function lp_cookie_lp_validate_referrer() {
+	return TRUE ;
+}
+
+function lp_cookie_lp_view($node, $teaser = FALSE, $page = FALSE) {
+	if (isset($node->cookie) && $node->cookie['cookie']) {
+		setcookie($node->cookie_name, $node->cookie_data, time()+$node->cookie_expires, $node->cookie_path, $node->cookie_domain) ;
+	}
+}
+?>

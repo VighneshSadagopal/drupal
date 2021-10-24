@@ -1,0 +1,63 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: 'लागू करें'
+          reset_button_label: 'दोबारा से स्थापित करें|'
+          exposed_sorts_label: 'क्रमबद्ध द्वारा'
+          sort_desc_label: अवरोही
+      pager:
+        options:
+          tags:
+            previous: ‹‹
+            next: ››
+          expose:
+            items_per_page_label: 'विषय प्रति पृष्ठ'
+            items_per_page_options_all_label: '-सभी-'
+      fields:
+        id:
+          label: आईडी
+          separator: ', '
+        type:
+          separator: ', '
+        value:
+          label: मान
+          separator: ', '
+        vote_source:
+          separator: ', '
+        user_id:
+          separator: ', '
+        timestamp:
+          separator: ', '
+  admin_page:
+    display_options:
+      fields:
+        id:
+          label: आईडी
+          separator: ', '
+        type:
+          separator: ', '
+        entity_id:
+          separator: ', '
+        entity_type:
+          separator: ', '
+        value:
+          label: मान
+          separator: ', '
+        vote_source:
+          separator: ', '
+        user_id:
+          separator: ', '
+        timestamp:
+          separator: ', '
+      menu:
+        title: मत
+  node_page:
+    display_options:
+      menu:
+        title: मत
+      arguments:
+        entity_id:
+          exception:
+            title: सभी

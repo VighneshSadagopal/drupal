@@ -1,0 +1,19 @@
+uuid: 22a1b291-22bb-44cf-8bb1-7caf517a2213
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: 'main:'
+_core:
+  default_config_hash: tpERwuLt-Fkm7y17zCBsgIOWXu5GWhd_eACFI2zG1jY
+name: 'Blog post'
+type: blog_post
+description: 'Use for multi-user blogs. Every user gets a personal blog.'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true

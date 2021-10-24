@@ -1,0 +1,24 @@
+uuid: 5db1d6c9-3b06-4af1-a54d-ca32583467f1
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.blogslides
+  module:
+    - views
+  theme:
+    - tara
+id: views_block__blogslides_block_1
+theme: tara
+region: content_home
+weight: -6
+provider: null
+plugin: 'views_block:blogslides-block_1'
+settings:
+  id: 'views_block:blogslides-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility: {  }

@@ -1,0 +1,45 @@
+uuid: 0829ed78-0be5-46ba-9102-25549b91fe2e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_image
+    - node.type.blog_post
+  module:
+    - content_translation
+    - image
+third_party_settings:
+  content_translation:
+    translation_sync:
+      alt: alt
+      title: title
+      file: '0'
+id: node.blog_post.field_content_image
+field_name: field_content_image
+entity_type: node
+bundle: blog_post
+label: Image
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg jfif'
+  max_filesize: ''
+  max_resolution: 400x400
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: 928e09a9-5850-4117-bf63-7acec1986cb9
+    alt: ''
+    title: ''
+    width: 318
+    height: 159
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image

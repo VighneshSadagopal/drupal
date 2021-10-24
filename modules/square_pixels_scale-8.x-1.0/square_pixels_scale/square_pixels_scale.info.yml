@@ -1,0 +1,10 @@
+name: Square pixels scale
+type: module
+description: "Adds an image affect that scales according to total square pixels."
+# core: 8.x
+
+# Information added by Drupal.org packaging script on 2018-09-05
+version: '8.x-1.0'
+core: '8.x'
+project: 'square_pixels_scale'
+datestamp: 1536132185

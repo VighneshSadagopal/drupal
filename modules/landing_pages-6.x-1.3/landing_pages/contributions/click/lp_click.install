@@ -1,0 +1,67 @@
+<?php
+// $Id
+
+/**
+ * @copyright (c) Economic Security Planning, Inc., 2009, all rights reserved.
+ */
+
+/**
+* Implementation of hook_install().
+*/
+/*
+ * Edit History:
+ *
+ *	Dick Munroe (munroe@csworks.com) 31-Mar-2009
+ *		Initial Version Created.
+ */
+
+function lp_click_install()
+{
+	switch ($GLOBALS['db_type']) 
+	{
+		case 'mysql':
+		case 'mysqli':
+			db_query("
+CREATE TABLE `{landing_pages_click}` (
+  `nid` int(10) unsigned NOT NULL,
+  `date` date NOT NULL,
+  `landing_pages_click` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`nid`,`date`),
+  KEY `nid` (`nid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;") ;
+		break;
+	
+		default:
+			/*
+			 * FIX THIS:
+			 *
+			 * There should be some sort of error message for unsupported
+			 * database types.
+			 */
+			break;
+	}
+}
+
+/**
+* make sure hooks are invoked after cck main hooks
+*/
+/*
+function landing_pages_update_6000() {
+  $ret = array();
+  $ret[] = update_sql("sql goes hear");
+  return $ret;
+}
+*/
+
+/**
+* Implementation of hook_uninstall().
+*/
+function lp_click_uninstall()
+{
+	db_query(
+		"DROP TABLE {landing_pages_click} ;") ;
+		
+	db_query(
+		"DELETE FROM {landing_pages} WHERE `operation` = 'click'") ;
+}
+?>

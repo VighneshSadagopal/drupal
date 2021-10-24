@@ -1,0 +1,15 @@
+; $Id.
+name = Landing Pages - Ubercart
+description = Track sales of specific products or product groups.
+core = 6.x
+package = Landing Pages
+php = "5.2"
+dependencies[] = "landing_pages"
+dependencies[] = "uc_product"
+
+; Information added by drupal.org packaging script on 2009-05-21
+version = "6.x-1.3"
+core = "6.x"
+project = "landing_pages"
+datestamp = "1242924938"
+

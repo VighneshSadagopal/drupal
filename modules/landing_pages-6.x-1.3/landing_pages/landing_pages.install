@@ -1,0 +1,84 @@
+<?php
+// $Id
+
+/**
+ * @copyright (c) Economic Security Planning, Inc., 2009, all rights reserved.
+ */
+
+/**
+* Implementation of hook_install().
+*/
+/*
+ * Edit History:
+ *
+ *	Dick Munroe (munroe@csworks.com) 31-Mar-2009
+ *		Initial Version Created.
+ */
+
+function landing_pages_install()
+{
+	switch ($GLOBALS['db_type']) 
+	{
+		case 'mysql':
+		case 'mysqli':
+			db_query("
+CREATE TABLE `{landing_pages}` (
+  `nid` int(10) unsigned NOT NULL default '0',
+  `operation` varchar(64) NOT NULL,
+  `weight` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`nid`,`operation`),
+  KEY `nid` (`nid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;") ;
+
+			db_query("
+CREATE TABLE IF NOT EXISTS `{landing_pages_referrers}` (
+  `nid` int(10) unsigned NOT NULL default '0',
+  `lp_referrers` text NOT NULL,
+  KEY `nid` (`nid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;") ;
+			break;
+	
+		default:
+			/*
+			 * FIX THIS:
+			 *
+			 * There should be some sort of error message for unsupported
+			 * database types.
+			 */
+			break;
+	}
+}
+
+function landing_pages_update_6000() {
+  $ret = array();
+  $ret[] = 
+  	update_sql("
+CREATE TABLE IF NOT EXISTS `{landing_pages_referrers}` (
+  `nid` int(10) unsigned NOT NULL default '0',
+  `lp_referrers` text NOT NULL,
+  KEY `nid` (`nid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;");
+  return $ret;
+}
+
+function landing_pages_update_6001() {
+  $ret = array();
+  $ret[] = 
+  	update_sql("
+ ALTER TABLE `{landing_pages}` ADD PRIMARY KEY ( `nid` , `operation` )  ");
+  return $ret;
+}
+
+/**
+* Implementation of hook_uninstall().
+*/
+function landing_pages_uninstall()
+{
+	db_query(
+		"DROP TABLE {landing_pages} ;") ;
+
+	db_query(
+		"DROP TABLE {landing_pages_referrers} ;") ;
+}
+
+?>

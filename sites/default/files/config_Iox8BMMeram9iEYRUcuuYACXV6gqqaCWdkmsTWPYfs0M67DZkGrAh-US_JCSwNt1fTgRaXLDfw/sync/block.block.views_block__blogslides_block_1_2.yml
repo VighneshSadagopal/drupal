@@ -1,0 +1,35 @@
+uuid: 6f4e0cde-fd4a-457e-832d-7bc0143e3670
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.blogslides
+  module:
+    - user
+    - views
+  theme:
+    - tara
+id: views_block__blogslides_block_1_2
+theme: tara
+region: sidebar_second
+weight: -6
+provider: null
+plugin: 'views_block:blogslides-block_1'
+settings:
+  id: 'views_block:blogslides-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      anonymous: anonymous
+      authenticated: authenticated
+      administrator: administrator
+      author: author
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

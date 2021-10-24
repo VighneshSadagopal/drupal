@@ -1,0 +1,15 @@
+; $Id.
+name = Landing Pages - Cookie
+description = Define cookies to be set for landing pages on your website
+version = "6.x-1.0"
+core = 6.x
+package = Landing Pages
+php = "5.2"
+dependencies[] = "landing_pages"
+
+; Information added by drupal.org packaging script on 2009-05-21
+version = "6.x-1.3"
+core = "6.x"
+project = "landing_pages"
+datestamp = "1242924938"
+

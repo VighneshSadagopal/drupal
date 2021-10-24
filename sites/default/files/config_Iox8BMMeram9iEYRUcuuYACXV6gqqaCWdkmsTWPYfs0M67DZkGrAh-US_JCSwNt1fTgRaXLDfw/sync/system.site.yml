@@ -1,0 +1,15 @@
+uuid: 3a78e2dd-b89c-4aab-9d57-539b7946010d
+name: 'Visual Select'
+mail: vighneshp65@gmail.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node
+admin_compact_mode: false
+weight_select_max: 100
+langcode: en
+default_langcode: en
+_core:
+  default_config_hash: yTxtFqBHnEWxQswuWvkjE8mKw2t8oKuCL1q8KnfHuGE
+mail_notification: s.vighneshofficial@gmail.com

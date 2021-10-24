@@ -1,0 +1,119 @@
+<?php
+// $Id: lp_click.module,v 1.2 2009/04/23 22:08:51 munroerichard Exp $
+
+/*
+ * Implementation of hook_form_alter
+ */
+
+function lp_click_form_landing_pages_node_form_alter(
+	&$form,
+	$form_state) {
+
+	$form['click'] = array(
+  	'#title' => 'Click Counter',
+  	'#type' => 'fieldset',
+  	'#collapsible' => TRUE,
+  	'#collapsed' => ! (isset($form['#node']->click) && $form['#node']->click['click']),
+  	'#weight' => -400
+  ) ;
+  
+  $xxx = array(
+  	'click' => t('Count number of landings')
+  ) ;
+  
+  $form['click']['click'] = array(
+    '#type' => 'checkboxes',
+    '#description' => t('Check this to have this landing page landing counted'),
+    '#options' => $xxx,
+    '#default_value' => isset($form['#node']->click) && $form['#node']->click['click'] ? array('click') : array(),
+  );
+}
+
+function lp_click_lp_delete($node) {
+  db_query("DELETE FROM {landing_pages} WHERE nid = %d AND operation = 'click'", $node->nid);
+
+  db_query("DELETE FROM {landing_pages_click} WHERE nid = %d", $node->nid);
+}
+
+function lp_click_lp_insert($node) {
+  if (isset($node->click) && $node->click['click']) {
+  	db_query(
+  		"INSERT INTO {landing_pages} (nid, operation, weight) VALUES (%d, '%s', %d)",
+  		$node->nid,
+  		$node->click['click'],
+  		-400) ;
+  }
+}
+
+function lp_click_lp_load($node) {
+	$additions = new stdClass() ;
+
+	$query = 
+		db_query(
+			"SELECT date, landing_pages_click FROM {landing_pages_click} WHERE nid = %d ORDER BY date DESC",
+			$node->nid) ;
+
+	$xxx = array() ;
+	
+	while ($row = db_fetch_object($query)) {
+		$xxx[$row->date] = $row->landing_pages_click ;
+	}
+
+	if (count($xxx) != 0) {
+		$additions->landing_pages_click = $xxx ;
+	}
+	
+	if (db_fetch_object(db_query("SELECT * FROM {landing_pages} WHERE nid = %d AND operation = 'click'", $node->nid))) {
+		$additions->click['click'] = 'click' ;
+	}
+
+	return $additions ;
+}
+
+function lp_click_lp_validate(&$node, &$form) {
+	if ($node->click['click'])
+	{
+		return TRUE ;
+	}
+
+	return FALSE ;
+}
+
+function lp_click_lp_validate_referrer() {
+	return TRUE ;
+}
+
+function lp_click_lp_update($node) {
+	if (!isset($node->click) || !$node->click['click']) {
+	  db_query("DELETE FROM {landing_pages} WHERE nid = %d AND operation = 'click'", $node->nid);
+	
+	  db_query("DELETE FROM {landing_pages_click} WHERE nid = %d", $node->nid);			
+	} else {
+  	@db_query(
+  		"INSERT INTO {landing_pages} (nid, operation, weight) VALUES (%d, '%s', %d)",
+  		$node->nid,
+  		$node->click['click'],
+  		-400) ;
+	}
+}
+
+function lp_click_lp_view($node, $teaser = FALSE, $page = FALSE) {
+	if (isset($node->click) && $node->click['click']) {
+		/*
+		 * The insert needs to happen every time so that the record counting
+		 * has someplace to happen.
+		 */
+		
+		@db_query(
+			"INSERT INTO {landing_pages_click} (nid, date, landing_pages_click) VALUES (%d, '%s', %d)",
+			$node->nid,
+			date('Y-m-d'),
+			0) ;
+		
+		db_query(
+			"UPDATE {landing_pages_click} SET landing_pages_click = landing_pages_click + 1 WHERE nid = %d AND date = '%s'", 
+			$node->nid,
+			date('Y-m-d')) ;
+	}
+}
+?>

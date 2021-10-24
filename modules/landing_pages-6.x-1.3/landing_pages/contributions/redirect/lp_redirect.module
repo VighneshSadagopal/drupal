@@ -1,0 +1,116 @@
+<?php
+// $Id: lp_redirect.module,v 1.2 2009/04/23 22:08:51 munroerichard Exp $
+
+/*
+ * Implementation of hook_form_alter
+ *
+ * Revision information makes no sense for landing pages, so get rid of the
+ * revision section (if any) of the landing pages node form.
+ */
+
+function lp_redirect_form_landing_pages_node_form_alter(
+	&$form,
+	$form_state) {	
+
+  $form['redirect'] = array(
+  	'#title' => 'Redirect',
+  	'#type' => 'fieldset',
+  	'#collapsible' => TRUE,
+  	'#collapsed' => ! (isset($form['#node']->redirect) && $form['#node']->redirect['redirect']),
+  	'#weight' => -100
+  ) ;
+  
+  $xxx = array(
+  	'redirect' => t('Redirect')
+  ) ;
+  
+  $form['redirect']['redirect'] = array(
+    '#type' => 'checkboxes',
+    '#description' => t('Check this to have this landing page redirect to some other page'),
+    '#options' => $xxx,
+    '#default_value' => isset($form['#node']->redirect) && $form['#node']->redirect['redirect'] ? array('redirect') : array(),
+  );
+  
+  $form['redirect']['redirect_url'] = array(
+	  '#type' => 'textfield',
+	  '#title' => 'URL',
+  	'#default_value' => isset($form['#node']->redirect_url) ? $form['#node']->redirect_url : '',
+  	'#description' => t('URL to which the landing page is redirected'),
+  	'#maxlength' => 256,
+  	'#size' => 32,
+  ) ;
+}
+
+function lp_redirect_lp_delete($node) {
+  db_query("DELETE FROM {landing_pages} WHERE nid = %d AND operation = 'redirect'", $node->nid);
+
+  db_query("DELETE FROM {landing_pages_redirect} WHERE nid = %d", $node->nid);
+}
+
+function lp_redirect_lp_insert($node) {
+  if (isset($node->redirect) && $node->redirect['redirect']) {
+  	db_query(
+  		"INSERT INTO {landing_pages} (nid, operation, weight) VALUES (%d, '%s', %d)",
+  		$node->nid,
+  		$node->redirect['redirect'],
+  		-100) ;
+  		
+  	db_query(
+  		"INSERT INTO {landing_pages_redirect} (nid, redirect_url) VALUES (%d, '%s')",
+  		$node->nid,
+  		$node->redirect_url) ;
+  }
+}
+
+function lp_redirect_lp_load($node) {
+	$additions = new stdClass() ;
+	
+	$additions = 
+		db_fetch_object(
+			db_query(
+				"SELECT redirect_url FROM {landing_pages_redirect} WHERE nid = %d",
+				$node->nid)) ; 
+
+	if ($additions) {
+		$additions->redirect['redirect'] = 'redirect' ;
+	}
+	
+	return $additions ;
+}
+
+function lp_redirect_lp_update($node) {
+	lp_redirect_lp_delete($node) ;
+	lp_redirect_lp_insert($node) ;
+}
+
+function lp_redirect_lp_validate(&$node, &$form) {
+	if ($node->redirect['redirect'])
+	{
+		/*
+		 * Process cookie data.
+		 */
+		
+		$valid = FALSE ;
+		
+		if (! $node->redirect_url) {
+			form_set_error('redirect_url', "A URL is required to emit a redirect") ;
+			$valid = TRUE ;
+		}
+
+		return ! $valid ;
+	}
+
+	return FALSE ;
+}
+
+function lp_redirect_lp_view($node, $teaser = FALSE, $page = FALSE) {
+	if (isset($node->redirect) && $node->redirect['redirect']) {
+		if (strpos($node->redirect_url, '://') != 0) {
+			header('Location: ' . $node->redirect_url) ;
+			exit() ;
+		} else {
+			drupal_goto($node->redirect_url) ;
+		}
+	}
+}
+?>

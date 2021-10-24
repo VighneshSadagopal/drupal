@@ -1,0 +1,11 @@
+uuid: da6df3f9-f77b-4144-bec6-db0008ef6c01
+langcode: en
+status: true
+dependencies:
+  module:
+    - simple_like_button
+id: simple_like.simple_like
+target_entity_type_id: simple_like
+target_bundle: simple_like
+default_langcode: site_default
+language_alterable: false

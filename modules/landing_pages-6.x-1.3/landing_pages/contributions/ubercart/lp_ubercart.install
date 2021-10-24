@@ -1,0 +1,87 @@
+<?php
+// $Id
+
+/**
+ * @copyright (c) Economic Security Planning, Inc., 2009, all rights reserved.
+ */
+
+/**
+* Implementation of hook_install().
+*/
+/*
+ * Edit History:
+ *
+ *	Dick Munroe (munroe@csworks.com) 31-Mar-2009
+ *		Initial Version Created.
+ *
+ *	Dick Munroe (munroe@csworks.com) 20-May-2009
+ *		Add refund processing by treating an order cancel as a refund (simply put
+ *		a negative amount into the tracking table).
+ *		If a user is deleted, loose the financial data from the tracking table.
+ */
+
+function lp_ubercart_install()
+{
+	switch ($GLOBALS['db_type']) 
+	{
+		case 'mysql':
+		case 'mysqli':
+			db_query("
+CREATE TABLE `{landing_pages_ubercart}` (
+  `nid` int(10) unsigned NOT NULL,
+  `ubercart_product_nid` int(10) unsigned NOT NULL,
+  KEY `nid` (`nid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;") ;
+
+			db_query("
+CREATE TABLE IF NOT EXISTS `{landing_pages_ubercart_track}` (
+  `nid` int(10) unsigned NOT NULL,
+	`uid` INT(10) UNSIGNED NOT NULL,
+  `order_id` INT(10) UNSIGNED NOT NULL,
+  `ubercart_product_nid` int(10) unsigned NOT NULL,
+  `date` date NOT NULL,
+  `price` double NOT NULL,
+  KEY `nid` (`nid`),
+  KEY `order_id` (`order_id`),
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;") ;
+		break;
+	
+		default:
+			/*
+			 * FIX THIS:
+			 *
+			 * There should be some sort of error message for unsupported
+			 * database types.
+			 */
+			break;
+	}
+}
+
+function lp_ubercart_update_6000() {
+  $ret = array();
+  $ret[] = update_sql("ALTER TABLE `{landing_pages_ubercart_track}` ADD `uid` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `nid` ;");
+  return $ret;
+}
+
+function lp_ubercart_update_6001() {
+  $ret = array();
+  $ret[] = update_sql("ALTER TABLE `{landing_pages_ubercart_track}` ADD `order_id` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `uid` ;");
+	$ret[] = update_sql("ALTER TABLE `{landing_pages_ubercart_track}` ADD INDEX ( `order_id` ) ;") ;
+	$ret[] = update_sql("ALTER TABLE `{landing_pages_ubercart_track}` ADD INDEX ( `uid` ) ;") ;
+	return $ret;
+}
+
+/**
+* Implementation of hook_uninstall().
+*/
+function lp_ubercart_uninstall()
+{
+	db_query(
+		"DROP TABLE {landing_pages_ubercart} ;") ;
+
+	db_query(
+		"DROP TABLE {landing_pages_ubercart_track} ;") ;
+}
+
+?>

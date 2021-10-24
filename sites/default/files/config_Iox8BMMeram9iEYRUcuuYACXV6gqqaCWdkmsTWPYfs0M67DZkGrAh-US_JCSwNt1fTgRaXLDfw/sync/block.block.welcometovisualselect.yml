@@ -1,0 +1,30 @@
+uuid: a2dc242d-ac8f-40a6-ab40-05befb347cd0
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:ec6b8453-f097-4c76-8c9b-b05a1fb94255'
+  module:
+    - block_content
+    - system
+  theme:
+    - tara
+id: welcometovisualselect
+theme: tara
+region: content_top
+weight: -7
+provider: null
+plugin: 'block_content:ec6b8453-f097-4c76-8c9b-b05a1fb94255'
+settings:
+  id: 'block_content:ec6b8453-f097-4c76-8c9b-b05a1fb94255'
+  label: 'Welcome to Visual Select'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "/profile-info\r\n/gallery"
+    negate: true

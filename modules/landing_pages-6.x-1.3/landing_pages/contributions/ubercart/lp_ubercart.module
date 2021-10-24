@@ -1,0 +1,411 @@
+<?php
+// $Id: lp_ubercart.module,v 1.2.2.3 2009/05/21 16:46:20 munroerichard Exp $
+
+/*
+ * Implementation of hook_form_alter
+ */
+
+function lp_ubercart_form_landing_pages_node_form_alter(
+	&$form,
+	$form_state) {	
+
+  $form['ubercart'] = array(
+  	'#title' => 'Ubercart Tracking',
+  	'#type' => 'fieldset',
+  	'#collapsible' => TRUE,
+  	'#collapsed' => ! (isset($form['#node']->ubercart) && $form['#node']->ubercart['ubercart']),
+  	'#weight' => -300
+  ) ;
+  
+  $xxx = array(
+  	'ubercart' => t('Ubercart Tracking')
+  ) ;
+  
+  $form['ubercart']['ubercart'] = array(
+    '#type' => 'checkboxes',
+    '#description' => t('Check this to have this landing page track Ubercart purchases'),
+    '#options' => $xxx,
+    '#default_value' => isset($form['#node']->ubercart) && $form['#node']->ubercart['ubercart'] ? array('ubercart') : array(),
+  );
+  
+	/*
+	 * Put only products in the list.
+	 */
+	
+	$query = 
+		db_query(
+			"SELECT nid, title FROM {node} WHERE type = 'product' ORDER BY title ;") ;
+			
+	$xxx = array() ;
+	
+	while ($row = db_fetch_object($query)) {
+		$xxx[$row->nid] = $row->title ;
+	}
+	  
+  $form['ubercart']['ubercart_products'] = array(
+	  '#type' => 'checkboxes',
+	  '#title' => 'Select tracked products',
+	  '#options' => $xxx,
+  	'#default_value' => isset($form['#node']->ubercart_products) ? $form['#node']->ubercart_products : array(),
+  	'#description' => t('Products to be tracked for this site after landing on this page'),
+  ) ;
+}
+
+function lp_ubercart_lp_delete($node) {
+  db_query("DELETE FROM {landing_pages} WHERE nid = %d AND operation = 'ubercart'", $node->nid);
+
+  db_query("DELETE FROM {landing_pages_ubercart} WHERE nid = %d", $node->nid);
+}
+
+function lp_ubercart_lp_insert($node) {
+  if (isset($node->ubercart) && $node->ubercart['ubercart']) {
+  	db_query(
+  		"INSERT INTO {landing_pages} (nid, operation, weight) VALUES (%d, '%s', %d)",
+  		$node->nid,
+  		$node->ubercart['ubercart'],
+  		-300) ;
+  	
+  	foreach ($node->ubercart_products as $product_nid) {
+  		if ($product_nid != 0) {
+		  	db_query(
+		  		"INSERT INTO {landing_pages_ubercart} (nid, ubercart_product_nid) VALUES (%d, %d)",
+		  		$node->nid,
+		  		$product_nid) ;
+  		}
+  	}
+  }
+}
+
+function lp_ubercart_lp_load($node) {
+	$additions = NULL ;
+	
+	$query = 
+		db_query(
+			"SELECT * FROM {landing_pages_ubercart} WHERE nid = %d",
+			$node->nid) ; 
+	
+	$xxx = array() ;
+	
+	while ($row = db_fetch_object($query)) {
+		$xxx[] = $row->ubercart_product_nid ;
+	}
+
+	if (count($xxx) != 0) {
+		$additions = new stdClass() ;
+		
+		$additions->ubercart_products = $xxx ;
+	}
+	
+	if ($additions) {
+		$additions->ubercart['ubercart'] = 'ubercart' ;
+	}
+
+	return $additions ;
+}
+
+function lp_ubercart_lp_update($node) {
+  if (!isset($node->ubercart) || !$node->ubercart['ubercart']) {
+	  db_query("DELETE FROM {landing_pages} WHERE nid = %d AND operation = 'ubercart'", $node->nid);
+	
+	  db_query("DELETE FROM {landing_pages_ubercart} WHERE nid = %d", $node->nid);
+	  
+	  db_query("DELETE FROM {landing_pages_ubercart_track} WHERE nid = %d", $node->nid);
+  } else {
+  	@db_query(
+  		"INSERT INTO {landing_pages} (nid, operation, weight) VALUES (%d, '%s', %d)",
+  		$node->nid,
+  		$node->ubercart['ubercart'],
+  		-300) ;
+  		
+  	$node->ubercart_products = array_filter($node->ubercart_products) ;
+  	
+  	/*
+  	 * Construct a list of nodes in the database.
+  	 */
+  	
+  	$query =
+  		db_query(
+  		"SELECT * FROM {landing_pages_ubercart} where nid = %d",
+  		$node->nid) ;
+  	
+  	$xxx = array() ;
+  	
+  	while ($row = db_fetch_object($query)) {
+  		$xxx[] = $row->ubercart_product_nid ;
+  	}
+  	
+  	/*
+  	 * $yyy1 contains all the nedes which must be deleted from the database.
+  	 */
+  	
+  	$yyy1 = array_diff($xxx, $node->ubercart_products) ;
+  	
+  	/*
+  	 * $yyy2 contains all the nodes which must be inserted into the database.
+  	 */
+  	
+  	$yyy2 = array_diff($node->ubercart_products, $xxx) ;
+  	
+  	foreach ($yyy1 as $v) {
+		  db_query(
+		  	"DELETE FROM {landing_pages_ubercart} WHERE nid = %d AND ubercart_product_nid = %d", 
+		  	$node->nid,
+		  	$v);
+		  
+		  db_query(
+		  	"DELETE FROM {landing_pages_ubercart_track} WHERE nid = %d AND ubercart_product_nid = %d", 
+		  	$node->nid,
+		  	$v);
+  	}
+
+		foreach ($yyy2 as $v) {
+	  	db_query(
+	  		"INSERT INTO {landing_pages_ubercart} (nid, ubercart_product_nid) VALUES (%d, %d)",
+	  		$node->nid,
+	  		$v) ;
+		}
+  }
+}
+
+function lp_ubercart_lp_validate(&$node, &$form) {
+	if ($node->ubercart['ubercart'])
+	{
+		/*
+		 * Process ubercart product tracking.
+		 */
+		
+		$valid = FALSE ;
+		
+		$xxx = $node->ubercart_products ;
+		
+		foreach ($xxx as $k => $v) {
+			if ($v == 0) {
+				unset($node->ubercart_products[$k]) ;
+			}
+		}
+		
+		if (! (isset($node->ubercart_products) && $node->ubercart_products)) {
+			form_set_error('ubercart_products', "One or more products must be selected") ;
+			$valid = TRUE ;
+		}
+
+		return ! $valid ;
+	}
+
+	return FALSE ;
+}
+
+function lp_ubercart_lp_validate_referrer() {
+	return TRUE ;
+}
+
+function lp_ubercart_lp_view($node, $teaser = FALSE, $page = FALSE) {
+	if (isset($node->ubercart) && $node->ubercart['ubercart']) {
+	  $xxx = explode(':', $_SERVER['HTTP_HOST']) ;
+	  
+	  $xxx = $xxx[0] ;
+	  
+	  $xxx = explode('.', $xxx) ;
+	  
+	  if (count($xxx) > 2) {
+	  	$xxx = array_slice($xxx, -2);
+	  }
+	  
+		$xxx = '.' . implode('.', $xxx) ;
+		
+		setcookie(
+			'lp_ubercart', 
+			sprintf('%d', $node->nid), 
+			time()+86400, 
+			'/', 
+			$xxx) ;
+	}
+}
+
+/**
+ * Perform actions on orders.
+ *
+ * An order in Übercart represents a single transaction. Orders are created
+ * during the checkout process where they sit in the database with a status of In
+ * Checkout. When a customer completes checkout, the order's status gets updated
+ * to show that the sale has gone through. Once an order is created, and even
+ * during its creation, it may be acted on by any module to connect extra
+ * information to an order. Every time an action occurs to an order, hook_order()
+ * gets invoked to let your modules know what's happening and make stuff happen.
+ *
+ * @param $op
+ *   The action being performed.
+ * @param &$arg1
+ *   This is the order object or a reference to it as noted below.
+ * @param $arg2
+ *   This is variable and is based on the value of $op:
+ *   - new: Called when an order is created. $arg1 is a reference to the new
+ *       order object, so modules may add to or modify the order at creation.
+ *   - save: When an order object is being saved, the hook gets invoked with this
+ *       op to let other modules do any necessary saving. $arg1 is a reference to
+ *       the order object.
+ *   - load: Called when an order is loaded after the order and product data has
+ *       been loaded from the database. Passes $arg1 as the reference to the
+ *       order object, so modules may add to or modify the order object when it's
+ *       loaded.
+ *   - submit: When a sale is being completed and the customer has clicked the
+ *       Submit order button from the checkout screen, the hook is invoked with
+ *       this op. This gives modules a chance to determine whether or not the
+ *       order should be allowed. An example use of this is the credit module
+ *       attempting to process payments when an order is submitted and returning
+ *       a failure message if the payment failed.
+ *
+ *       To prevent an order from passing through, you must return an array
+ *       resembling the following one with the failure message:
+ *       @code
+ *         return array(array('pass' => FALSE, 'message' => t('We were unable to process your credit card.')));
+ *       @endcode
+ *   - can_update: Called before an order's status is changed to make sure the
+ *       order can be updated. $arg1 is the order object with the old order
+ *       status ID ($arg1->order_status), and $arg2 is simply the new order
+ *       status ID. Return FALSE to stop the update for some reason.
+ *   - update: Called when an order's status is changed. $arg1 is the order
+ *       object with the old order status ID ($arg1->order_status), and $arg2 is
+ *       the new order status ID.
+ *   - can_delete: Called before an order is deleted to verify that the order may
+ *       be deleted. Returning FALSE will prevent a delete from happening. (For
+ *       example, the payment module returns FALSE by default when an order has
+ *       already received payments.)
+ *   - delete: Called when an order is deleted and before the rest of the order
+ *       information is removed from the database. Passes $arg1 as the order
+ *       object to let your module clean up it's tables.
+ *   - total: Called when the total for an order is being calculated after the
+ *       total of the products has been added. Passes $arg1 as the order object.
+ *       Expects in return a value (positive or negative) by which to modify the
+ *       order total.
+ */
+
+function lp_ubercart_order($op, &$arg1, $arg2) {
+
+/*
+ * The magic is the update op with an arg2 of completed.  At that point, the customer
+ * has paid for the order, we've received money, and the customer should be done.  We don't
+ * have access to the paypal stuff (but we may not have gone through paypal in any event)
+ * so we have to record the necessary bits.
+ */
+
+	if ($op != 'update')
+	{
+		return ;
+	}
+	
+	switch ($arg2) {
+		case 'canceled':
+			_lp_ubercart_order_canceled($op, $arg1, $arg2) ;
+			break ;
+		
+		case 'completed':
+			_lp_ubercart_order_completed($op, $arg1, $arg2) ;
+	}
+}
+
+function lp_ubercart_user(
+	$theOperation,
+	&$theFormValues,
+	&$theUser,
+	$category = NULL) {
+	switch ($theOperation) {
+		case 'delete':
+
+			/*
+			 * The user is being deleted, drop all his financial data from the ubercart tracking
+			 * tables.
+			 */
+
+			db_query("DELETE FROM {landing_pages_ubercart_track} WHERE uid = %d", $theUser->uid) ;
+			break ;
+
+		default:
+			break;
+	}
+}
+
+function _lp_ubercart_order_canceled($op, &$arg1, $arg2) {
+	/*
+	 * Since orders getting cancelled can have more than one product associated,
+	 * go through all product entries in the tracking table and refund all of them.
+	 *
+	 * There is no binding between the user canceling the order and user completing
+	 * the order save for the order id.
+	 */
+	
+	$query =
+		db_query(
+			"SELECT * FROM {landing_pages_ubercart_track} WHERE order_id = %d",
+			$arg1->order_id) ;
+
+	while ($row = db_fetch_object($query)) {
+		db_query(
+			"INSERT INTO {landing_pages_ubercart_track} (nid, uid, order_id, ubercart_product_nid, date, price) VALUES (%d, %d, %d, %d, '%s', %s)",
+			$row->nid,
+			$row->uid,
+			$row->order_id,
+			$row->ubercart_product_nid,
+			$row->date,
+			- $row->price) ;
+	}
+}
+
+function _lp_ubercart_order_completed($op, &$arg1, $arg2) {
+	static $nid ;
+	
+	/*
+	 * At this point, we know that there is a update to completed that has to occur.
+	 */
+	
+	if (!isset($nid)) {
+		if (isset($_COOKIE['lp_ubercart'])) {
+			$nid = (int)$_COOKIE['lp_ubercart'] ;
+		} else {
+			/*
+			 * There is no nid and no cookie so there isn't any tracking to be done
+			 * for this landing.
+			 */
+
+			return ;
+		}
+	}
+	
+	static $product_nids ;
+	
+	if (!isset($product_nids)) {
+		$query = 
+			db_query(
+				"SELECT ubercart_product_nid FROM {landing_pages_ubercart} WHERE nid = %d",
+				$nid) ;
+				
+		$product_nids = array() ;
+		
+		while ($row = db_fetch_object($query)) {
+			$product_nids[] = $row->ubercart_product_nid ;
+		}
+	}
+	
+	if (count($product_nids) == 0) {
+		/*
+		 * There was a cookie, but the product nids were deleted so there is some kind
+		 * of race.
+		 */
+		
+		return ;
+	}
+
+	foreach ($arg1->products as $product) {
+		if (array_search($product->nid, $product_nids) !== FALSE) {
+			db_query(
+				"INSERT INTO {landing_pages_ubercart_track} (nid, uid, order_id, ubercart_product_nid, date, price) VALUES (%d, %d, %d, %d, '%s', %s)",
+				$nid,
+				$arg1->uid,
+				$arg1->order_id,
+				$product->nid,
+				date('Y-m-d'),
+				$product->price) ;
+		}
+	}
+}
+?>

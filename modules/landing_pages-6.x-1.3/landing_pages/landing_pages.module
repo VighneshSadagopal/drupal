@@ -1,0 +1,506 @@
+<?php
+// $Id: landing_pages.module,v 1.2 2009/04/23 22:08:50 munroerichard Exp $
+
+/**
+ * @file
+ * This is an example outlining how a module can be used to define a new
+ * node type.
+ *
+ * Our example node type will allow users to specify a "color" and a "quantity"
+ * for their nodes; some kind of rudimentary inventory-tracking system, perhaps?
+ * To store this extra information, we need an auxiliary database table.
+ *
+ * Database definition:
+ * @code
+ *	CREATE TABLE `ESPlannerWeb_landing_pages` (
+ * 		`nid` int(10) unsigned NOT NULL default '0',
+ *		`uid` int(10) unsigned NOT NULL COMMENT 'uid of user creating the landing pager',
+ *		`operation` varchar(64) NOT NULL,
+ *		`weight` int(11) NOT NULL default '0',
+ *		`data` longtext COMMENT 'Data for the operation',
+ *		KEY `nid` (`nid`)
+ *		) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+ * @endcode
+ * 
+ * The final implementation of this module should include a batch of different
+ * modules each contributing to the various kinds of operations that are possible.
+ * 
+ * The initial implementation will have fixed functions and operations.
+ */
+
+/**
+ * Implementation of hook_access().
+ *
+ * Node modules may implement node_access() to determine the operations
+ * users may perform on nodes. This example uses a very common access pattern.
+ */
+function landing_pages_access($op, $node, $account) {
+	switch ($op) {
+		case 'create':
+			return user_access('create landing_pages content', $account);
+			break;
+
+		case 'update':
+			return (user_access('edit any landing_pages content', $account) || (user_access('edit own landing_pages content', $account) && ($account->uid == $node->uid)))  ;
+			break;
+			
+		case 'delete':
+			return (user_access('delete any landing_pages content', $account) || (user_access('delete own landing_pages content', $account) && ($account->uid == $node->uid))) ;
+			break ;
+			
+		case 'view':
+			return (user_access('view any landing_pages content', $account) || (user_access('view own landing_pages content', $account) && ($account->uid == $node->uid))) ;
+			
+		default:
+			return FALSE ;
+			break;
+	}
+}
+
+/**
+ * Implementation of hook_delete().
+ *
+ * When a node is deleted, we need to remove all related records from out table.
+ */
+function landing_pages_delete($node) {	
+	_landing_pages_delete($node) ;
+	
+	/*
+	 * Walk the module list and invoke the landing pages insert hook.
+	 */
+		
+	foreach (module_implements('lp_delete') as $module) {
+		call_user_func($module . '_lp_delete', $node) ;
+	}
+}
+
+/**
+ * Implementation of hook_form().
+ *
+ * Now it's time to describe the form for collecting the information
+ * specific to this node type. This hook requires us to return an array with
+ * a sub array containing information for each element in the form.
+ */
+function landing_pages_form(&$node) {
+  // The site admin can decide if this node type has a title and body, and how
+  // the fields should be labeled. We need to load these settings so we can
+  // build the node form correctly.
+
+  // The site admin can decide if this node type has a title and body, and how
+  // the fields should be labeled. We need to load these settings so we can
+  // build the node form correctly.
+  $type = node_get_types('type', $node);
+
+  if ($type->has_title) {
+    $form['title'] = array(
+      '#type' => 'textfield',
+      '#title' => check_plain($type->title_label),
+      '#required' => TRUE,
+      '#default_value' => $node->title,
+      '#weight' => -5
+    );
+  }
+  
+  if ($type->has_body) {
+    // In Drupal 6, we can use node_body_field() to get the body and filter
+    // elements. This replaces the old textarea + filter_form() method of
+    // setting this up. It will also ensure the teaser splitter gets set up
+    // properly.
+    $form['body_field'] = node_body_field($node, $type->body_label, $type->min_word_count);
+  }
+
+  $form['lp_referrers'] = array(
+  	'#type' => 'textarea',
+  	'#title' => t('Affiliate sites'),
+  	'#required' => FALSE,
+  	'#rows' => 6,
+  	'#cols' => 48,
+  	'#default_value' => isset($node->lp_referrers) ? $node->lp_referrers : '',
+  	'#description' => t('List of valid referring sites, if site begins with \'.\', e.g. .esplanner.com, tail matching in the referrer is used, otherwise an exact match is required, e.g., www.esplanner.com.  If no site is entered all referrers are valid.'),
+  	'#element_validate' => array('_landing_pages_lp_referrers_validate'),
+  	'#weight' => -999,
+  ) ;
+
+  return $form;
+}
+
+/*
+ * Implementation of hook_form_landing_pages_node_form_alter
+ *
+ * Revision information makes no sense for landing pages, so get rid of the
+ * revision section (if any) of the landing pages node form.
+ *
+ * Publishing options also don't make sense.
+ */
+
+function landing_pages_form_landing_pages_node_form_alter(
+	&$form,
+	$form_state) {
+		
+	$form['title']['#weight'] = -1000 ;
+	
+	if (isset($form['body_field'])) {
+		$form['body_field']['#weight'] = -999 ;
+	}
+
+	unset($form['log']) ;
+	unset($form['menu']) ;
+	unset($form['options']) ;
+	unset($form['revision_information']) ;
+}
+	
+/**
+ * Implementation of hook_insert().
+ *
+ * As a new node is being inserted into the database, we need to do our own
+ * database inserts.
+ * 
+ * The over all structure of the landing pages is an ordered set of operations
+ * which happen at view time.  At the moment these are hardwired as:
+ * 
+ * 	1. Emit a cookie.
+ * 	2. Emit a page.
+ * 	3. Redirect to a page.
+ * 
+ * When I have more time, I'll construct a plugin interface, like ubercart, and
+ * call them dynamically to sort things out.
+ */
+function landing_pages_insert($node) {
+	_landing_pages_insert($node) ;
+	
+	/*
+	 * Walk the module list and invoke the landing pages insert hook.
+	 */
+
+	foreach (module_implements('lp_insert') as $module) {
+		call_user_func($module . '_lp_insert', $node) ;
+	}
+}
+
+/**
+ * Implementation of hook_load().
+ *
+ * Now that we've defined how to manage the node data in the database, we
+ * need to tell Drupal how to get the node back out. This hook is called
+ * every time a node is loaded, and allows us to do some loading of our own.
+ */
+function landing_pages_load($node) {
+	/*
+	 * Walk the module list and invoke the landing pages load hook.
+	 */
+
+	$additions = new stdClass ;
+
+	$a = 
+		db_fetch_object(
+			db_query(
+				"SELECT lp_referrers FROM {landing_pages_referrers} WHERE nid = %d",
+				$node->nid)) ;
+				
+	if (isset($a) && $a) {
+		$additions = $a ;
+	}
+	
+	foreach (module_implements('lp_load') as $module) {
+		$a = call_user_func($module . '_lp_load', $node) ;
+		
+		if (isset($a) && $a) {
+			_landing_pages_object_merge($additions, $a) ;
+		}
+	}
+	
+	return $additions;
+}
+
+/**
+ * Implementation of hook_node_info(). This function replaces hook_node_name()
+ * and hook_node_types() from 4.6. Drupal 5 expands this hook significantly.
+ *
+ * This is a required node hook. This function describes the nodes provided by
+ * this module.
+ *
+ * The required attributes are:
+ * - "name" provides a human readable name for the node,
+ * - "module" tells Drupal how the module's functions map to hooks (i.e. if the
+ *   module is landing_pages_foo then landing_pages_foo_insert will be called
+ *   when inserting the node).
+ * - "description" provides a brief description of the node type, which is
+ *   show up when a user accesses the "Create content" page for that node type.
+ *
+ * The other optional, attributes:
+ * - "has_title" boolean that indicates whether or not this node type has a
+ *   title field.
+ * - "title_label": the label for the title field of this content type.
+ * - "has_body": boolean that indicates whether or not this node type has a
+ *   body field.
+ * - "body_label": the label for the body field of this content type.
+ * - "min_word_count": the minimum number of words for the body field to be
+ *   considered valid for this content type.
+ */
+function landing_pages_node_info() {
+  return array(
+    'landing_pages' => array(
+      'name' => t('Landing Pages'),
+      'module' => 'landing_pages',
+      'description' => t("Define landing pages for multiple users."),
+      'has_title' => TRUE,
+      'title_label' => 'Landing Page Title',
+      'has_body' => TRUE,
+      'body_label' => t("Landing Page Body (optional)")
+    )
+  );
+}
+
+/**
+ * Implementation of hook_perm().
+ *
+ * Since we are limiting the ability to create new nodes to certain users,
+ * we need to define what those permissions are here. We also define a permission
+ * to allow users to edit the nodes they created.
+ */
+function landing_pages_perm() {
+  return array(
+    'create landing_pages content',
+    'delete own landing_pages content',
+    'delete any landing_pages content',
+    'edit own landing_pages content',
+    'edit any landing_pages content',
+    'view own landing_pages content',
+    'view any landing_pages content',
+  );
+}
+
+/**
+ * Implementation of hook_update().
+ *
+ * As an existing node is being updated in the database, we need to do our own
+ * database updates.
+ */
+function landing_pages_update($node) {
+	_landing_pages_delete($node) ;
+
+	_landing_pages_insert($node) ;
+
+	/*
+	 * Walk the module list and invoke the landing pages insert hook.
+	 */
+
+	foreach (module_implements('lp_update') as $module) {
+		call_user_func($module . '_lp_update', $node) ;
+	}
+}
+
+/**
+ * Implementation of hook_validate().
+ *
+ * Our "quantity" field requires a number to be entered. This hook lets
+ * us ensure that the user entered an appropriate value before we try
+ * inserting anything into the database.
+ *
+ * Errors should be signaled with form_set_error().
+ */
+function landing_pages_validate($node, &$form) {
+	/*
+	 * In the completed module, each validation function would get called in turn
+	 * to handle validation.  In this version, all data is handled in a single
+	 * spot.
+	 */
+	
+	if ($form['#post']['op']  == 'Delete') {
+		/*
+		 * The delete button was clicked, so bypass the validation part of the process.
+		 */
+		
+		return ;
+	}
+
+	$operations = 0 + (isset($node->body) && !empty($node->body) ? 1 : 0);
+
+	/*
+	 * Walk the module list and invoke the landing pages validate hook.
+	 */
+
+	foreach (module_implements('lp_validate') as $module) {
+		if (call_user_func($module . '_lp_validate', $node, $form)) {
+			$operations++ ;
+		}
+	}
+	
+	if ($operations == 0) {
+		form_set_error('','At least one landing page operation must be selected') ;
+	}
+}
+
+/**
+ * Implementation of hook_view().
+ *
+ * This is a typical implementation that simply runs the node text through
+ * the output filters.
+ */
+function landing_pages_view($node, $teaser = FALSE, $page = FALSE) {
+	$node = node_prepare($node, $teaser) ;
+	
+	$query = 
+		db_query(
+			"SELECT operation FROM {landing_pages} WHERE nid = %d ORDER BY weight",
+			$node->nid) ;
+
+	while ($row = db_fetch_object($query)) {
+		/*
+		 * If the operation provides no function to provide information about validating
+		 * the referrer, go ahead and perform the operation (we assume no validation is required).
+		 *
+		 * If the hook_lp_validate_referrer returns false, no validation is required, so 
+		 * perform the operation.
+		 *
+		 * If the referrer is one of the valid referrers to this landing page, perform 
+		 * the operation.
+		 */
+		
+		if (function_exists('lp_' . $row->operation . '_lp_validate_referrer')) {
+			if (call_user_func('lp_' . $row->operation . '_lp_validate_referrer')) {
+				if (_landing_pages_check_referrer($node, parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST))) {
+					call_user_func('lp_' . $row->operation . '_lp_view', $node, $teaser, $page) ;
+				}
+			} else {
+				call_user_func('lp_' . $row->operation . '_lp_view', $node, $teaser, $page) ;
+			}
+		} else {
+			call_user_func('lp_' . $row->operation . '_lp_view', $node, $teaser, $page) ;
+		}
+	}
+	
+	/*
+	 * Even if this content type doesn't actually render anything, the node has to be
+	 * returned.
+	 */
+	
+	return $node ;
+}
+
+/*
+ * All helper functions appear below here.
+ */
+
+function _landing_pages_check_referrer($node, $referrer) {
+	static $result ;
+	
+	if (isset($result)) {
+		return $result ;
+	}
+
+	$result = TRUE ;
+	
+	$xxx = array() ;
+	
+	if (isset($node->lp_referrers)) {
+		$xxx = explode("\n", $node->lp_referrers) ;
+	
+		array_pop($xxx) ;
+	}
+	
+	if (!$xxx) {
+		/*
+		 * Nothing was in the referrers list, so this always succeeds.
+		 */
+		
+		return TRUE ;
+	}
+	
+	foreach ($xxx as $host) {
+		$host = trim($host) ;
+		if (substr($host, 0, 1) == '.') {
+			$yyy = substr($referrer, -strlen($host)) ;
+			if ($host == $yyy) {
+				/*
+				 * The tail match worked, so we're done.
+				 */
+				return TRUE ;
+			} else {
+				if (strlen($host) == ( strlen($referrer) + 1 ) ) {
+					/*
+					 * This is for the case when the tail match is exactly
+					 * the referrer, so we're checking the tail less the period
+					 * to see if it matches.
+					 */
+					if (substr($host, 1) == $referrer) {
+						return TRUE ;
+					}
+				}
+			}
+		} else {
+			if ($host == $referrer) {
+				/*
+				 * The explicit host match worked, so we're done.
+				 */
+				
+				return TRUE ;
+			}
+		}
+	}
+
+	$result = FALSE;
+	
+	return FALSE ;	
+}
+
+function _landing_pages_delete($node) {
+	db_query(
+		"DELETE FROM {landing_pages_referrers} WHERE nid = %d",
+		$node->nid) ;
+}
+
+function _landing_pages_insert($node) {
+	if (isset($node->lp_referrers))
+	{
+		db_query(
+			"INSERT INTO {landing_pages_referrers} (nid, lp_referrers) VALUES (%d, '%s')",
+			$node->nid, $node->lp_referrers) ;
+	}
+}
+
+function _landing_pages_lp_referrers_validate(
+	$element, 
+	&$form_state)
+{
+	$error = FALSE ;
+	$xxx = array() ;
+	
+	if (isset($element['#value'])) {
+		$xxx = trim($element['#value']) ;
+		
+		$xxx = explode("\n", $xxx) ;
+		
+		foreach (array_reverse(array_keys($xxx)) as $k) {
+			$xxx[$k] = trim($xxx[$k]) ;
+			if ($xxx[$k] == '') {
+				unset($xxx[$k]) ;
+			} else {
+				if (!preg_match('/^\w*(\.\w+){2,}$/', $xxx[$k])) {
+					form_set_error('lp_referrers', t('%r is not a valid referrer', array('%r' =>$xxx[$k]))) ;
+					$error = TRUE ;
+				}
+			}
+		}
+	}
+
+	if (!$error) {
+		$xxx = implode("\n", $xxx) ;
+		if ($xxx != '') {
+			$xxx .= "\n" ;
+		}
+		
+		form_set_value ($element, $xxx, $form_state) ;
+	}
+}
+
+function _landing_pages_object_merge(
+	&$output,
+	&$input) {
+	
+	foreach ($input as $k => $v)
+	{
+		$output->$k = $v ;
+	}
+}
+?>

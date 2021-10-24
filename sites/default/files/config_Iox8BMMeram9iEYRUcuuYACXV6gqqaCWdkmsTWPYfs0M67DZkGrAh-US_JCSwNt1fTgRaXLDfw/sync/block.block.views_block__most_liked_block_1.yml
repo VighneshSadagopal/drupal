@@ -1,0 +1,24 @@
+uuid: 7a3c3a47-b976-42a8-a7a9-1ab750ec1ec8
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.most_liked
+  module:
+    - views
+  theme:
+    - tara
+id: views_block__most_liked_block_1
+theme: tara
+region: sidebar_second
+weight: -5
+provider: null
+plugin: 'views_block:most_liked-block_1'
+settings:
+  id: 'views_block:most_liked-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility: {  }
