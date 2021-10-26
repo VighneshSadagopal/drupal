@@ -387,7 +387,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: 'Recent blogs'
+      title: 'Recent Blog'
       header: {  }
       footer: {  }
       empty: {  }

@@ -26,5 +26,5 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "/profile-info\r\n/gallery"
+    pages: "/profile-info\r\n/gallery\r\n/error404"
     negate: true

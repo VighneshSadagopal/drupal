@@ -1,0 +1,8 @@
+uuid: 9247266b-a5b8-4a20-b06c-0948a0962cf8
+langcode: en
+status: true
+dependencies: {  }
+id: anonmoyous-user
+label: 'Anonmoyous user'
+description: ''
+locked: false

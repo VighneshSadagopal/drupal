@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.message_subscribe_email
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -24,8 +25,20 @@ content:
   language:
     weight: 0
     region: content
+  message_subscribe_email:
+    type: boolean_checkbox
+    weight: 25
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    region: content
   timezone:
     weight: 6
+    region: content
+  translation:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
     region: content
   user_picture:
     type: image_image

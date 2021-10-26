@@ -1,0 +1,15 @@
+uuid: 3be86415-5c2f-410f-86c4-07df3801366f
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.bookmark
+  module:
+    - flag
+id: flag_action.bookmark_unflag
+label: 'Remove bookmark'
+type: node
+plugin: 'flag_action:bookmark_unflag'
+configuration:
+  flag_id: bookmark
+  flag_action: unflag

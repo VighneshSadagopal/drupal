@@ -1,0 +1,15 @@
+uuid: b1276ec9-518a-4241-bafb-2f12cfd3620b
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.subscribe_user
+  module:
+    - flag
+id: flag_action.subscribe_user_flag
+label: Subscribe
+type: user
+plugin: 'flag_action:subscribe_user_flag'
+configuration:
+  flag_id: subscribe_user
+  flag_action: flag
