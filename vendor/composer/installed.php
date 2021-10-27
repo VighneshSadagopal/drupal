@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => 'b74071f9f8c785ab3659eb8fd01f164b9e2dc742',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -566,14 +566,12 @@
             ),
         ),
         'drupal/flag' => array(
-            'pretty_version' => 'dev-4.x',
-            'version' => 'dev-4.x',
+            'pretty_version' => '4.0.0-beta2',
+            'version' => '4.0.0.0-beta2',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/flag',
-            'aliases' => array(
-                0 => '4.x-dev',
-            ),
-            'reference' => 'adbaab83407641dc52198e7e656ce20db03207a7',
+            'aliases' => array(),
+            'reference' => '8.x-4.0-beta2',
             'dev_requirement' => false,
         ),
         'drupal/forum' => array(
@@ -643,12 +641,12 @@
             ),
         ),
         'drupal/legacy-project' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => 'b74071f9f8c785ab3659eb8fd01f164b9e2dc742',
             'dev_requirement' => false,
         ),
         'drupal/link' => array(
