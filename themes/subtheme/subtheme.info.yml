@@ -1,0 +1,10 @@
+name: subtheme
+type: theme
+base theme: tara
+description: '<p>Tara is a light weight modern Drupal 8, 9 theme by <a href="https://www.drupar.com/" target="_blank">Drupar.com</a></p><p><a href="https://www.drupar.com/theme/tara" target="_blank">Theme Homepage</a> | <a href="https://www.drupar.com/tara-theme-documentation" target="_blank">User Guide</a></p>'
+package: Drupar
+core_version_requirement: ^8 || ^9
+
+libraries:
+  - subtheme/global-styling # Library for all global css. These css will be loaded on every pages.
+
