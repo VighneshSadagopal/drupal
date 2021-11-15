@@ -1,0 +1,14 @@
+uuid: 925f173a-a1ef-47f3-96ae-d977b37ddcf6
+langcode: en
+status: true
+dependencies: {  }
+name: newstyl
+label: newstyle
+effects:
+  170137c4-bf24-40ac-8997-47ec3b7e5f11:
+    uuid: 170137c4-bf24-40ac-8997-47ec3b7e5f11
+    id: image_resize
+    weight: 1
+    data:
+      width: 900
+      height: 450

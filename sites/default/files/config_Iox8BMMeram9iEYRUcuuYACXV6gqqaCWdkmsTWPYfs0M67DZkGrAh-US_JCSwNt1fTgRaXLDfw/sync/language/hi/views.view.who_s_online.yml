@@ -2,7 +2,7 @@ label: 'ऑनलाइन ब्लॉक कौन है'
 description: 'सबसे हाल ही में सक्रिय उपयोगकर्ताओं और सक्रिय उपयोगकर्ताओं की कुल संख्या के उपयोगकर्ता नाम दिखाता है।'
 display:
   default:
-    display_title: डीफॉल्ट
+    display_title: vighnesh
     display_options:
       exposed_form:
         options:

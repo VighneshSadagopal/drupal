@@ -1,6 +1,6 @@
 uuid: 1cdaa3a6-c2be-480a-ae69-29a5bacb371f
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - message_subscribe_ui

@@ -1,0 +1,21 @@
+uuid: ce2abca1-8374-4e5b-a40c-bacd7df0a450
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.flagging.bookmark.field_body
+    - flag.flag.bookmark
+id: flagging.bookmark.default
+targetEntityType: flagging
+bundle: bookmark
+mode: default
+content:
+  field_body:
+    weight: 0
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden: {  }

@@ -2,7 +2,7 @@ label: 'हाल के कमेन्ट'
 description: 'हाल की टिप्पणियाँ'
 display:
   default:
-    display_title: डीफॉल्ट
+    display_title: vighnesh
     display_options:
       title: 'हाल के कमेन्ट'
       empty:

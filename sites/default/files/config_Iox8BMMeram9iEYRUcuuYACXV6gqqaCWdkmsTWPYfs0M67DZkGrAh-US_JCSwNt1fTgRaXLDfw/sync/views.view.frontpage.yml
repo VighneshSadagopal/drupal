@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.rss
+    - core.entity_view_mode.node.teaser
     - field.storage.node.body
     - field.storage.node.field_content_image
   module:
@@ -203,12 +204,10 @@ display:
           query_comment: ''
           query_tags: {  }
       row:
-        type: fields
+        type: 'entity:node'
         options:
-          default_field_elements: true
-          inline: {  }
-          separator: ''
-          hide_empty: false
+          relationship: none
+          view_mode: teaser
       sorts:
         uid:
           id: uid

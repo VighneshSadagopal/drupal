@@ -1,0 +1,24 @@
+uuid: 38284f43-9c56-44a4-9074-b2147202903d
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.blogslides
+  module:
+    - views
+  theme:
+    - subtheme
+id: subtheme_views_block__blogslides_block_1
+theme: subtheme
+region: sidebar_first
+weight: -6
+provider: null
+plugin: 'views_block:blogslides-block_1'
+settings:
+  id: 'views_block:blogslides-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility: {  }

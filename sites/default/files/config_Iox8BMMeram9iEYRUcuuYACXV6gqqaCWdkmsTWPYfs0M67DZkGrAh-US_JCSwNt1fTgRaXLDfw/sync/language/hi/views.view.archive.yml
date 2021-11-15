@@ -2,7 +2,7 @@ label: पुरालेख
 description: 'सभी सामग्री, महीने के हिसाब से।'
 display:
   default:
-    display_title: डीफॉल्ट
+    display_title: vighnesh
     display_options:
       title: 'मासिक पुरालेख'
       exposed_form:

@@ -1,0 +1,24 @@
+uuid: da33ee5d-23bb-4fa3-b8f7-a5e6adbdbb3f
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.blogslides
+  module:
+    - views
+  theme:
+    - visual
+id: visual_views_block__blogslides_block_1
+theme: visual
+region: main_navigation
+weight: -6
+provider: null
+plugin: 'views_block:blogslides-block_1'
+settings:
+  id: 'views_block:blogslides-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility: {  }

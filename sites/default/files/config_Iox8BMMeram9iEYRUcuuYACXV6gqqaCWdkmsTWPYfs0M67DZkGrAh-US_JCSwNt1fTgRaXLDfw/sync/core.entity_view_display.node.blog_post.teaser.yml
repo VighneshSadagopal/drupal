@@ -22,7 +22,7 @@ bundle: blog_post
 mode: teaser
 content:
   body:
-    label: inline
+    label: hidden
     type: text_summary_or_trimmed
     weight: 1
     settings:
@@ -33,10 +33,25 @@ content:
     type: image
     weight: 0
     region: content
-    label: inline
+    label: hidden
     settings:
       image_style: ''
       image_link: ''
+    third_party_settings: {  }
+  flag_bookmark:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  flag_email_node:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  flag_subscribe_node:
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   like_and_dislike:
     weight: 2

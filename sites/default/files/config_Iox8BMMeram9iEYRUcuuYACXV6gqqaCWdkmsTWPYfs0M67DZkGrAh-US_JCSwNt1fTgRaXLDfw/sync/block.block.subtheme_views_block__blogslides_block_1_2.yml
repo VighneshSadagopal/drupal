@@ -1,0 +1,40 @@
+uuid: 2471ebe7-56d2-4e72-bbbc-b109a1de5c2d
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.blogslides
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - subtheme
+id: subtheme_views_block__blogslides_block_1_2
+theme: subtheme
+region: sidebar_second
+weight: -6
+provider: null
+plugin: 'views_block:blogslides-block_1'
+settings:
+  id: 'views_block:blogslides-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      anonymous: anonymous
+      authenticated: authenticated
+      administrator: administrator
+      author: author
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+  request_path:
+    id: request_path
+    pages: "/error404\r\n/form/*"
+    negate: true

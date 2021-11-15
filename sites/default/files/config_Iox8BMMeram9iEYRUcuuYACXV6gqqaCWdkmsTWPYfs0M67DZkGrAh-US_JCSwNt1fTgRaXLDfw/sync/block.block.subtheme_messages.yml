@@ -1,0 +1,22 @@
+uuid: feab834c-d2fa-453b-b473-6a6d1402ffe8
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - subtheme
+_core:
+  default_config_hash: jRybYmcmTQ6xIX-OJZ0DhDtRCdrtGsC0CHaNfwfvgFQ
+id: subtheme_messages
+theme: subtheme
+region: highlighted
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

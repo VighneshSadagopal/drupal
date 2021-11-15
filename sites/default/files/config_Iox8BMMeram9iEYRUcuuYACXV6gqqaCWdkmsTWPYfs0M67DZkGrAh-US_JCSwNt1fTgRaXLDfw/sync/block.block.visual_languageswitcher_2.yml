@@ -1,0 +1,20 @@
+uuid: dc680c6f-4117-4b67-9849-5f1351582a78
+langcode: en
+status: false
+dependencies:
+  module:
+    - language
+  theme:
+    - visual
+id: visual_languageswitcher_2
+theme: visual
+region: main_navigation
+weight: -8
+provider: null
+plugin: 'language_block:language_interface'
+settings:
+  id: 'language_block:language_interface'
+  label: 'Language switcher'
+  provider: language
+  label_display: '0'
+visibility: {  }

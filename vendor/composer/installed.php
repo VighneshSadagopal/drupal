@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'b74071f9f8c785ab3659eb8fd01f164b9e2dc742',
+        'reference' => '01e44c70c03e5fb5a3672aeaeb3217fb3657f3cc',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -237,6 +237,24 @@
             'replaced' => array(
                 0 => '9.2.7',
             ),
+        ),
+        'drupal/business_responsive_theme' => array(
+            'pretty_version' => '2.0.2',
+            'version' => '2.0.2.0',
+            'type' => 'drupal-theme',
+            'install_path' => __DIR__ . '/../../themes/contrib/business_responsive_theme',
+            'aliases' => array(),
+            'reference' => '2.0.2',
+            'dev_requirement' => false,
+        ),
+        'drupal/cheeseburger_menu' => array(
+            'pretty_version' => '5.0.0-beta4',
+            'version' => '5.0.0.0-beta4',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../modules/contrib/cheeseburger_menu',
+            'aliases' => array(),
+            'reference' => '5.0.0-beta4',
+            'dev_requirement' => false,
         ),
         'drupal/ckeditor' => array(
             'dev_requirement' => false,
@@ -641,12 +659,12 @@
             ),
         ),
         'drupal/legacy-project' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'b74071f9f8c785ab3659eb8fd01f164b9e2dc742',
+            'reference' => '01e44c70c03e5fb5a3672aeaeb3217fb3657f3cc',
             'dev_requirement' => false,
         ),
         'drupal/link' => array(

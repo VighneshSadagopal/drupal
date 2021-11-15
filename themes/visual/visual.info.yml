@@ -1,12 +1,20 @@
-name : visual
+name: visual
 type: theme
-description: 'A cuddly theme that offers extra fluffiness.'
+base theme: stable
+description: '<p>Visual  light weight modern Drupal 8, 9 theme by Vighnesh <p>'
+package: Drupar
 core_version_requirement: ^8 || ^9
+screenshot: 'visual_select.jpg'
+
 libraries:
   - visual/global-styling
-base theme: classy
+
 regions:
-  header: 'Header'
-  content: 'Content'
-  sidebar_first: 'Sidebar first'
-  footer: 'Footer'
+  secondary_navigation : 'Secondary_Navigation'
+  main_navigation : 'Main Navigation'
+  site_branding : 'Site Branding'
+  search : 'Search'
+  content: Content
+  featured : 'Featured Post'
+  sidebar : 'Sidebar Right'
+  footer : 'Footer'

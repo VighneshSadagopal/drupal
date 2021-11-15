@@ -2,7 +2,7 @@ label: कर्मचारी
 description: 'अपनी साइट के साथ सहभागिता करने वाले लोगों को ढूंढें और प्रबंधित करें।'
 display:
   default:
-    display_title: डीफॉल्ट
+    display_title: vighnesh
     display_options:
       exposed_form:
         options:
@@ -12,6 +12,11 @@ display:
           sort_desc_label: अवरोही
       pager:
         options:
+          tags:
+            previous: ..
+            next: ..
+            first: ..
+            last: ..
           expose:
             items_per_page_label: 'विषय प्रति पृष्ठ'
             items_per_page_options_all_label: '-सभी-'

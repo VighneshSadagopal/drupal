@@ -1,0 +1,29 @@
+uuid: bffdabcc-e341-4b1b-af9b-9839eba47037
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.most_liked
+  module:
+    - system
+    - views
+  theme:
+    - visual
+id: visual_views_block__most_liked_block_1
+theme: visual
+region: featured
+weight: -8
+provider: null
+plugin: 'views_block:most_liked-block_1'
+settings:
+  id: 'views_block:most_liked-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: "/error404\r\n/form/*"
+    negate: true

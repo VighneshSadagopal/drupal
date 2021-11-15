@@ -1,0 +1,22 @@
+uuid: c91e650d-f8cd-4f05-923f-3fe68a5ecbb7
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - visual
+_core:
+  default_config_hash: KNm7FuGTPClw4gfFPN5Voyb-R4RYXyp2kcCzf9RqtuE
+id: visual_powered
+theme: visual
+region: main_navigation
+weight: -6
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

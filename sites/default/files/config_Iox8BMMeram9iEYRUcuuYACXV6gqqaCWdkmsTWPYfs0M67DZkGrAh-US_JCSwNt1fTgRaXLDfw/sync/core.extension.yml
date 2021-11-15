@@ -6,6 +6,7 @@ module:
   block_content: 0
   blog: 0
   breakpoint: 0
+  cheeseburger_menu: 0
   ckeditor: 0
   color: 0
   colorbox: 0
@@ -91,6 +92,10 @@ theme:
   stable: 0
   zuvi: 0
   tara: 0
+  subtheme: 0
+  classy: 0
+  visual: 0
+  business_responsive_theme: 0
 profile: standard
 _core:
   default_config_hash: R4IF-ClDHXxblLcG0L7MgsLvfBIMAvi_skumNFQwkDc

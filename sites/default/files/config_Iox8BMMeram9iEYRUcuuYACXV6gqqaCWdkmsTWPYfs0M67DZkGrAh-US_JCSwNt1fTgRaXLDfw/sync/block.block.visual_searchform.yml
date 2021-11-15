@@ -1,0 +1,26 @@
+uuid: 3d0c8456-a7fe-4f06-b564-2371df3b16b0
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+    - system
+  theme:
+    - visual
+id: visual_searchform
+theme: visual
+region: search
+weight: -8
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Search
+  provider: search
+  label_display: '0'
+  page_id: node_search
+visibility:
+  request_path:
+    id: request_path
+    pages: /error404
+    negate: true

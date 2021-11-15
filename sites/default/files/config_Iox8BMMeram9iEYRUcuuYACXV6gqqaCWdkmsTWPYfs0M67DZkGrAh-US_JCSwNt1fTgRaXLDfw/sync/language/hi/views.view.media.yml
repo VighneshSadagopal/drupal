@@ -1,6 +1,6 @@
 display:
   default:
-    display_title: डीफॉल्ट
+    display_title: vighnesh
     display_options:
       exposed_form:
         options:
@@ -13,6 +13,11 @@ display:
           expose:
             items_per_page_label: 'विषय प्रति पृष्ठ'
             items_per_page_options_all_label: '-सभी-'
+          tags:
+            previous: ..
+            next: ..
+            first: ..
+            last: ..
       fields:
         media_bulk_form:
           action_title: कार्रवाई

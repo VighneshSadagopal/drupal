@@ -16,6 +16,8 @@
     ],
     "require": {
         "composer/installers": "^1.9",
+        "drupal/business_responsive_theme": "^2.0",
+        "drupal/cheeseburger_menu": "^5.0@beta",
         "drupal/core-composer-scaffold": "^9.2",
         "drupal/core-project-message": "^9.2",
         "drupal/core-recommended": "^9.2",

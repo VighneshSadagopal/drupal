@@ -1,0 +1,22 @@
+uuid: 121c1eba-2415-4df0-97b1-a91c04cfccc5
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - visual
+_core:
+  default_config_hash: jRybYmcmTQ6xIX-OJZ0DhDtRCdrtGsC0CHaNfwfvgFQ
+id: visual_messages
+theme: visual
+region: main_navigation
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

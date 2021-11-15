@@ -1,0 +1,26 @@
+uuid: 646375c3-e91e-4d1c-8abc-4c4daa291068
+langcode: en
+status: false
+dependencies:
+  module:
+    - search
+    - system
+  theme:
+    - subtheme
+id: subtheme_searchform
+theme: subtheme
+region: sidebar_first
+weight: -7
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Search
+  provider: search
+  label_display: visible
+  page_id: node_search
+visibility:
+  request_path:
+    id: request_path
+    pages: /error404
+    negate: true

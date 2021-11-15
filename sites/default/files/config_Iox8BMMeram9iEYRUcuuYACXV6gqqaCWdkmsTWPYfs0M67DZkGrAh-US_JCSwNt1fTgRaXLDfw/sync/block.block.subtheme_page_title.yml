@@ -1,0 +1,29 @@
+uuid: fe7d4799-fb4f-43b9-80fd-8d3f658c03b4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  theme:
+    - subtheme
+_core:
+  default_config_hash: Jg8sbWAHmaNnulBIV3mIX9nhLlnTmVey6atMumOhqtU
+id: subtheme_page_title
+theme: subtheme
+region: content
+weight: -7
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: post
+  provider: core
+  label_display: '0'
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      blog_post: blog_post
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

@@ -7,7 +7,7 @@ dependencies:
 third_party_settings:
   menu_ui:
     available_menus: {  }
-    parent: 'main:'
+    parent: ''
 _core:
   default_config_hash: tpERwuLt-Fkm7y17zCBsgIOWXu5GWhd_eACFI2zG1jY
 name: 'Blog post'

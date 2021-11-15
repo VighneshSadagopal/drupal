@@ -1,0 +1,23 @@
+uuid: b1e99ca3-515f-4355-a835-d6ce50bc0982
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.flagging.bookmark.field_body
+    - flag.flag.bookmark
+id: flagging.bookmark.default
+targetEntityType: flagging
+bundle: bookmark
+mode: default
+content:
+  field_body:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden: {  }

@@ -8,6 +8,13 @@ display:
           reset_button_label: 'दोबारा से स्थापित करें|'
           exposed_sorts_label: 'क्रमबद्ध द्वारा'
           sort_desc_label: अवरोही
+      pager:
+        options:
+          tags:
+            previous: ..
+            next: ..
+            first: ..
+            last: ..
       fields:
         title:
           label: शीर्षक
@@ -43,7 +50,7 @@ display:
           expose:
             label: भाषा
       title: सामग्री
-    display_title: डीफॉल्ट
+    display_title: vighnesh
   page_1:
     display_options:
       menu:

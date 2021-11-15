@@ -738,7 +738,7 @@ $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
  * example.org, with all subdomains included.
  */
   $settings['trusted_host_patterns'] = [
-  '^standard\.local$',
+  '^drupal\.local$',
   '^.+\.example\.com$',
   '^example\.org$',
  ];
@@ -807,7 +807,7 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 $databases['default']['default'] = array (
-  'database' => 'standard',
+  'database' => 'drupal',
   'username' => 'vighnesh',
   'password' => 'Vighnesh.123',
   'prefix' => '',
@@ -822,3 +822,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', TRUE);
 ini_set('display_startup_errors', TRUE);
 $config['system.logging']['error_level'] = 'verbose';
+//$settings['file_public_path'] = 'sites/default/files';
+$config['image.settings']['suppress_itok_output'] = TRUE;
+$config['image.settings']['allow_insecure_derivatives'] = TRUE;

@@ -13,7 +13,7 @@ _core:
 id: subscribe_node
 label: Content
 bundles:
-  - page
+  - blog_post
 entity_type: node
 global: false
 weight: 0

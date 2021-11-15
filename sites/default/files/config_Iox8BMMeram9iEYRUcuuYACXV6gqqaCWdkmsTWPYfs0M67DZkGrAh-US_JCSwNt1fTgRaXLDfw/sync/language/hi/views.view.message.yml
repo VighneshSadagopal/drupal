@@ -1,6 +1,7 @@
 label: संदेश
 display:
   default:
+    display_title: vighnesh
     display_options:
       exposed_form:
         options:

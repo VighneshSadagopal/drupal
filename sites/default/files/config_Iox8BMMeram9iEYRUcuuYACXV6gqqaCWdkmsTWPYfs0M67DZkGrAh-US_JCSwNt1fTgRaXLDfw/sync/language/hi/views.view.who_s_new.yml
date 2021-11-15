@@ -2,7 +2,7 @@ label: 'नए सदस्य'
 description: 'साइट पर नवीनतम उपयोगकर्ता खातों की एक सूची दिखाता है।'
 display:
   default:
-    display_title: डीफॉल्ट
+    display_title: vighnesh
     display_options:
       exposed_form:
         options:
