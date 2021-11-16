@@ -1,0 +1,11 @@
+global-styling:
+  version: VERSION
+  css:
+    component:
+      css/font-awesome.css: {}
+    theme:
+      css/style.css: {}
+  js:
+    js/visual.js: {}
+  dependencies:
+    - core/jquery

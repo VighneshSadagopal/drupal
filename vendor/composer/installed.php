@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '01e44c70c03e5fb5a3672aeaeb3217fb3657f3cc',
+        'reference' => '3c3074d70ea832d9bcbc4dfca66c23fb4dd2037a',
         'name' => 'drupal/legacy-project',
         'dev' => true,
     ),
@@ -659,12 +659,12 @@
             ),
         ),
         'drupal/legacy-project' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '01e44c70c03e5fb5a3672aeaeb3217fb3657f3cc',
+            'reference' => '3c3074d70ea832d9bcbc4dfca66c23fb4dd2037a',
             'dev_requirement' => false,
         ),
         'drupal/link' => array(
@@ -866,6 +866,15 @@
             'install_path' => __DIR__ . '/../../modules/contrib/slick',
             'aliases' => array(),
             'reference' => '8.x-2.4',
+            'dev_requirement' => false,
+        ),
+        'drupal/social_media_links' => array(
+            'pretty_version' => '2.8.0',
+            'version' => '2.8.0.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../modules/contrib/social_media_links',
+            'aliases' => array(),
+            'reference' => '8.x-2.8',
             'dev_requirement' => false,
         ),
         'drupal/standard' => array(
