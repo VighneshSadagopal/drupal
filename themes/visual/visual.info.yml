@@ -14,8 +14,10 @@ regions:
   main_navigation : 'Main Navigation'
   site_branding : 'Site Branding'
   search : 'Search'
-  about : 'About Us'
+  banner : 'Banner'
   content: Content
   featured : 'Featured Post'
   sidebar : 'Sidebar Right'
-  footer : 'Footer'
+  footer1: 'Footer First'
+  footer2: 'Footer Second'
+  footer3: 'Footer Third'

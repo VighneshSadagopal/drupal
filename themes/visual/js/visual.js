@@ -1,14 +1,17 @@
-var search = document.getElementById('edit-submit');
-var searchbox = document.getElementById('edit-keys');
+var searchicon= document.getElementById('searchicon');
+var secondary = document.getElementById('secondary');
 var nav = document.getElementById('nav');
-search.addEventListener('click', () => {
-  searchbox.classList.toggle('hide');
+searchicon.addEventListener('click', () => {
+  secondary.classList.toggle('hide');
+  searchicon.classList.remove('fas fa-search');
+  searchicon.classList.add('fas fa-times');
+  
 });
 
 window.onscroll = function() {
-  if (window.pageYOffset > 120) {
+  if (window.pageYOffset > 100) {
       nav.style.background = "cadetblue";
-      nav.style.margin = "-36px 0px 20px 0px";
+      nav.style.margin = "-43px 0px 20px 0px";
       nav.style.position = "0";
       nav.style.borderBottom = "2px solid white";
   } else {
