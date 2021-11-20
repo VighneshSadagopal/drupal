@@ -1,0 +1,23 @@
+name: custome_theme
+type: theme
+base theme: visual
+description: '<p>Visual  light weight modern Drupal 8, 9 theme by Vighnesh <p>'
+package: Drupar
+core_version_requirement: ^8 || ^9
+screenshot: 'visual_select.jpg'
+
+libraries:
+  - custom_theme/global-styling
+
+regions:
+  secondary_navigation : 'Secondary_Navigation'
+  main_navigation : 'Main Navigation'
+  site_branding : 'Site Branding'
+  search : 'Search'
+  banner : 'Banner'
+  content: Content
+  featured : 'Featured Post'
+  sidebar : 'Sidebar Right'
+  footer1: 'Footer First'
+  footer2: 'Footer Second'
+  footer3: 'Footer Third'

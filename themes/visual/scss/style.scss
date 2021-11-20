@@ -103,12 +103,23 @@ form#search-block-form{
        width: 97%;
        margin-left: 3%;
     
-        .views-field-title span.field-content{
+        .views-field-title 
+        {
+            position: absolute;
+            z-index: 10;
+            top: 56%;
+            font-size: x-large;
+            width:91%;
+            text-align: center;
+            font-weight: bold;
+            
+            span.field-content{
             position: absolute;
             font-size: 24px;
             color: White;
             z-index: 2;
         }
+    }
         .views-field-field-content-image {
             object-fit: cover;
            width: 91%;
@@ -120,20 +131,22 @@ form#search-block-form{
             opacity: 70%;
         }
         }
+        .views-field-body{
+            background-color: white;
        p{
             position: absolute;
             color: black;
             background-color: white;
             z-index: 2; 
-            bottom: 13.5%;
-            min-height: 24%;
-            width: 89%;
+            bottom: 9%;
+            min-height: 25%;
+            width: 87.8%;
             padding: 7px;   
-            display: none;
             border-bottom-right-radius:15px ;
             border-bottom-left-radius:15px ;
-           animation: content 0.5s ease-in-out;
+          
                 }
+            }
                
                 .js-form-item label{
                     
@@ -210,10 +223,13 @@ ul.links {
     }
 }
 }
-@keyframes content {
-    0% {
-        bottom: 0px;
-    }
+.hovercontent{
+    display:none;
+    background-color: white;
+    transition: 0.7s;
+}
+.views-field-like-and-dislike {
+    padding: 10px;
 }
 form#views-exposed-form-frontpage-page-1 {
     display: flex;
@@ -249,16 +265,36 @@ ul.pager__items.js-pager__items {
     background: transparent;
     color: cadetblue;
     font-size: 18px;
-    padding: 7px 13px;
     margin-right: 26px;
     cursor: pointer;
 }
+.views-field-view-node {
+    position: absolute;
+    bottom: 14%;
+    z-index: 10;
+    left: 2%;
+
+    a{
+        border: 2px solid black;
+        padding: 2px 7px;
+        text-decoration: none;
+        color: white;
+        background-color: black;
+        border-bottom-left-radius: 10px;
+    }
+}
+.views-field-uid {
+    z-index: 10;
+    position: absolute;
+    bottom: 14%;
+    right: 12%;
+    text-transform: capitalize;
+    font-style: italic;
+}
+
 .blog .views-col{
     position: relative;
-  
- 
-    &:hover p{
-        // transform: scale(1.2);
+    &:hover .hovercontent{
         display: block;
     }
 }

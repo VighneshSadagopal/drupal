@@ -1,0 +1,38 @@
+.footer1 h2 {
+  margin-bottom: 10px; }
+
+.footer1 p {
+  width: 70%; }
+
+.footer1 ul li {
+  padding: 7px 13px;
+  font-size: large; }
+  .footer1 ul li a {
+    color: white;
+    text-decoration: none; }
+
+#block-custom-theme-content #user-login-form {
+  width: 65%;
+  position: relative;
+  left: 17%; }
+  #block-custom-theme-content #user-login-form .js-form-type-textfield {
+    margin: 10px; }
+    #block-custom-theme-content #user-login-form .js-form-type-textfield label {
+      position: unset;
+      margin-right: 10px; }
+  #block-custom-theme-content #user-login-form .js-form-type-password {
+    margin: 10px; }
+    #block-custom-theme-content #user-login-form .js-form-type-password label {
+      position: unset;
+      margin-right: 15px; }
+  #block-custom-theme-content #user-login-form .js-form-type-checkbox {
+    top: 35px;
+    margin: 10px;
+    position: relative; }
+    #block-custom-theme-content #user-login-form .js-form-type-checkbox label {
+      font-size: 15px;
+      position: unset;
+      margin-right: 10px; }
+
+.description {
+  display: none; }

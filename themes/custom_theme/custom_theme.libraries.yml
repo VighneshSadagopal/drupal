@@ -6,6 +6,6 @@ global-styling:
     theme:
       css/style.css: {}
   js:
-    js/visual.js: {}
+    js/custom.js: {}
   dependencies:
     - core/jquery
