@@ -1,0 +1,41 @@
+nav.pager {
+    display: flex;
+    justify-content: center;
+    ul {
+        margin-bottom: 20px;
+        li.pager__item {
+            padding: 10px;
+            a {
+                background-color: cadetblue;
+                color: white;
+                padding: 10px;
+                font-weight: 700;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+a.feed-icon {
+    display: none;
+}
+
+.main .content select.form-select {
+    font-size: 14px;
+    position: relative;
+    right: 131%;
+    top: 1px;
+    width: 195px;
+    height: 29px;
+}
+
+.main .content .button.js-form-submit.form-submit {
+    padding: 4.5px;
+    position: relative;
+    // top: 0%;
+    // left: 25%;
+    right: 1240%;
+    background-color: cadetblue;
+    color: white;
+    font-weight: 700;
+}

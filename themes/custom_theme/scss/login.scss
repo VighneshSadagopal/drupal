@@ -1,34 +1,35 @@
-#block-custom-theme-content{
-    #user-login-form{
+#block-custom-theme-content {
+    #user-login-form {
         width: 65%;
         position: relative;
         left: 17%;
-        .js-form-type-textfield{
+        .js-form-type-textfield {
             margin: 10px;
-            label{
+            label {
                 position: unset;
                 margin-right: 10px;
-            }    
+            }
         }
-        .js-form-type-password{
+        .js-form-type-password {
             margin: 10px;
-            label{
+            label {
                 position: unset;
                 margin-right: 15px;
-            }    
+            }
         }
-        .js-form-type-checkbox{
+        .js-form-type-checkbox {
             top: 35px;
             margin: 10px;
             position: relative;
-            label{
+            label {
                 font-size: 15px;
                 position: unset;
                 margin-right: 10px;
-            }    
+            }
         }
     }
 }
-.description{
+
+.description {
     display: none;
 }
