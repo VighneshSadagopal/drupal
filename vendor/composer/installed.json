@@ -2402,6 +2402,109 @@
             "install-path": "../../modules/contrib/persistent_login"
         },
         {
+            "name": "drupal/responsive_image_formatter_link_to_image_style",
+            "version": "2.0.0",
+            "version_normalized": "2.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/responsive_image_formatter_link_to_image_style.git",
+                "reference": "2.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/responsive_image_formatter_link_to_image_style-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "fdc20ae91df3b751a63315fe38a42f835765c402"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9",
+                "php": ">=5.5.9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.0",
+                    "datestamp": "1620936404",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "installation-source": "dist",
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Eli.Stone",
+                    "homepage": "https://www.drupal.org/user/3537348"
+                },
+                {
+                    "name": "dan2k3k4",
+                    "homepage": "https://www.drupal.org/user/2437398"
+                }
+            ],
+            "description": "Provides an additional formatter for responsive image core field, to link to an image style.",
+            "homepage": "https://www.drupal.org/project/responsive_image_formatter_link_to_image_style",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/responsive_image_formatter_link_to_image_style",
+                "issues": "https://www.drupal.org/project/issues/responsive_image_formatter_link_to_image_style"
+            },
+            "install-path": "../../modules/contrib/responsive_image_formatter_link_to_image_style"
+        },
+        {
+            "name": "drupal/responsive_menus",
+            "version": "1.0.0-alpha1",
+            "version_normalized": "1.0.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/responsive_menus.git",
+                "reference": "8.x-1.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/responsive_menus-8.x-1.0-alpha1.zip",
+                "reference": "8.x-1.0-alpha1",
+                "shasum": "13e4c132e5635f45269533bb8bbde1fd56442f94"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-alpha1",
+                    "datestamp": "1620507188",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "installation-source": "dist",
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "jwjoshuawalker",
+                    "homepage": "https://www.drupal.org/user/433663"
+                }
+            ],
+            "description": "Responsify any menu using CSS Selectors.",
+            "homepage": "https://www.drupal.org/project/responsive_menus",
+            "support": {
+                "source": "https://git.drupalcode.org/project/responsive_menus"
+            },
+            "install-path": "../../modules/contrib/responsive_menus"
+        },
+        {
             "name": "drupal/slick",
             "version": "2.4.0",
             "version_normalized": "2.4.0.0",

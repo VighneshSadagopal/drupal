@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0; }
 
+body {
+  overflow-x: hidden; }
+
 .header {
   display: flex;
   width: 100%;
@@ -52,20 +55,21 @@ form#search-block-form {
   transition: ease-in-out; }
 
 .container {
-  margin: 30px; }
+  padding-left: 15px;
+  padding-top: 20px; }
 
 .main {
   margin-top: 15px;
   display: flex; }
   .main .content {
-    width: 97%;
-    margin-left: 3%; }
+    width: 100%;
+    padding: 5px 10px; }
     .main .content .views-field-title {
       position: absolute;
       z-index: 10;
       top: 56%;
       font-size: x-large;
-      width: 91%;
+      width: 97%;
       text-align: center;
       font-weight: bold; }
       .main .content .views-field-title span.field-content {
@@ -75,7 +79,7 @@ form#search-block-form {
         z-index: 2; }
     .main .content .views-field-field-content-image {
       object-fit: cover;
-      width: 91%;
+      width: 97%;
       background-color: black;
       border-radius: 15px;
       overflow: hidden;
@@ -91,8 +95,9 @@ form#search-block-form {
         z-index: 2;
         bottom: 9%;
         min-height: 25%;
-        width: 87.8%;
+        width: 93%;
         padding: 7px;
+        text-align: justify;
         border-bottom-right-radius: 15px;
         border-bottom-left-radius: 15px; }
     .main .content .js-form-item label {
@@ -150,6 +155,10 @@ form#search-block-form {
   background-color: white;
   transition: 0.7s; }
 
+.views-view-grid.horizontal.cols-3.clearfix {
+  display: grid;
+  justify-content: space-evenly; }
+
 .views-field-like-and-dislike {
   padding: 10px; }
 
@@ -167,13 +176,12 @@ figure.align-center {
     opacity: 70%; }
 
 figcaption {
-  position: absolute;
-  top: 65%;
-  width: 80%;
   text-align: center;
-  left: 8%;
   font-size: 22px;
-  color: white; }
+  position: relative;
+  background-color: transparent;
+  color: white;
+  bottom: 10%; }
 
 ul.pager__items.js-pager__items {
   list-style: none;
@@ -210,7 +218,8 @@ ul.pager__items.js-pager__items {
   font-style: italic; }
 
 .blog .views-col {
-  position: relative; }
+  position: relative;
+  width: unset !important; }
   .blog .views-col:hover .hovercontent {
     display: block; }
 
@@ -225,7 +234,7 @@ ul.pager__items.js-pager__items {
 .footer {
   background-color: #24262b;
   display: inline-flex;
-  width: auto;
+  width: 95.5%;
   justify-content: space-around;
   color: white;
   padding: 30px; }

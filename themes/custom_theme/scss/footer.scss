@@ -1,0 +1,12 @@
+.footer {
+    padding: unset;
+    width: 100%;
+    @include mobile {
+        display: block;
+        padding: unset;
+        .footer1 {
+            width: 95%;
+            padding: 20px 0px 20px 20px;
+        }
+    }
+}

@@ -16,6 +16,7 @@ regions:
   search : 'Search'
   banner : 'Banner'
   content: Content
+  aboutus: 'About Us'
   featured : 'Featured Post'
   sidebar : 'Sidebar Right'
   footer1: 'Footer First'

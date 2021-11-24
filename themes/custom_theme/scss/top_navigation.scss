@@ -1,0 +1,46 @@
+@mixin mobile {
+    @media screen and (max-width: 426px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and(min-width: 427px) and(max-width: 769px) {
+        @content;
+    }
+}
+
+.top_navigation {
+    @include mobile {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        .secondary {
+            input#edit-submit {
+                margin-left: 3px;
+                padding: 5px 6px;
+                background-color: lightskyblue;
+                color: white;
+                border: none;
+                font-weight: 800;
+                font-size: 10px;
+            }
+            input#edit-keys {
+                height: 21px;
+            }
+        }
+    }
+}
+
+.header {
+    @include mobile {
+        .site_branding {
+            #block-custom-theme-branding {
+                a img {
+                    height: 34px;
+                }
+            }
+        }
+    }
+}

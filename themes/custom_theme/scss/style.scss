@@ -1,6 +1,21 @@
+@mixin mobile {
+    @media screen and (max-width: 426px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and(min-width: 427px) and(max-width: 769px) {
+        @content;
+    }
+}
+
 @import "useful_links.scss";
 @import "login.scss";
 @import "list_frontpage.scss";
 @import "pager.scss";
 @import "main.scss";
 @import "owl_carousel.scss";
+@import "top_navigation.scss";
+@import "footer.scss";
+@import "navigation.scss";

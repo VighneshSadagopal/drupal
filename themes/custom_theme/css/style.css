@@ -113,6 +113,9 @@
     font-size: 20px;
     left: 30%;
     top: 72%; }
+    @media screen and (max-width: 426px) {
+      .listcontent .views-field.views-field-like-and-dislike {
+        padding: 10px 0px; } }
 
 form#views-exposed-form-list-frontpage-block-1 {
   display: flex;
@@ -132,6 +135,9 @@ nav.pager {
         padding: 10px;
         font-weight: 700;
         text-decoration: none; }
+        @media screen and (max-width: 426px) {
+          nav.pager ul li.pager__item a {
+            font-size: 11px; } }
 
 a.feed-icon {
   display: none; }
@@ -139,23 +145,52 @@ a.feed-icon {
 .main .content select.form-select {
   font-size: 14px;
   position: relative;
-  right: 131%;
+  right: 60%;
   top: 1px;
   width: 195px;
   height: 29px; }
+  @media screen and (max-width: 426px) {
+    .main .content select.form-select {
+      font-size: 11px;
+      right: -27%;
+      top: -4px;
+      width: 114px;
+      height: 28px; } }
+  @media screen and (min-width: 427px) and (max-width: 769px) {
+    .main .content select.form-select {
+      position: relative;
+      right: 4%;
+      top: 2px;
+      height: 25px; } }
+
+.main .content .js-form-item label {
+  left: 10.5%; }
 
 .main .content .button.js-form-submit.form-submit {
   padding: 4.5px;
   position: relative;
-  right: 1240%;
+  right: 912%;
   background-color: cadetblue;
   color: white;
   font-weight: 700; }
+  @media screen and (max-width: 426px) {
+    .main .content .button.js-form-submit.form-submit {
+      right: 19%;
+      bottom: 3px; } }
+  @media screen and (min-width: 427px) and (max-width: 769px) {
+    .main .content .button.js-form-submit.form-submit {
+      padding: 1.5px;
+      position: relative;
+      right: 392%; } }
 
 .sortcontent {
   text-align: right;
   margin-right: 5%;
-  font-size: 23px; }
+  font-size: 23px;
+  display: none; }
+  @media screen and (max-width: 426px) {
+    .sortcontent {
+      display: none; } }
   .sortcontent .gridicon {
     font-weight: 700;
     margin-right: 5%;
@@ -202,6 +237,90 @@ button#gridicon {
 button#gridicon.show {
   display: block; }
 
+@media screen and (max-width: 426px) {
+  .container {
+    margin: unset; } }
+
+@media screen and (max-width: 426px) {
+  .blog .views-col {
+    width: 100% !important; } }
+
+@media screen and (min-width: 427px) and (max-width: 769px) {
+  .blog .views-col {
+    width: unset !important; } }
+
+@media screen and (max-width: 426px) {
+  .featured {
+    display: none; } }
+
+@media screen and (max-width: 426px) {
+  .aboutus {
+    display: none; } }
+
+@media screen and (max-width: 426px) {
+  .main .content .js-form-item label {
+    font-size: 18px;
+    left: 4.5%; } }
+
+@media screen and (max-width: 426px) {
+  .main .content .hovercontent {
+    display: block; }
+  .main .content .views-field-title {
+    width: 98%;
+    position: relative;
+    bottom: 2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px; }
+  .main .content .views-field-body p {
+    width: 93.8%;
+    position: relative;
+    text-align: justify;
+    bottom: 50px;
+    height: 80px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); }
+  .main .content .views-field-view-node {
+    bottom: 19%; }
+  .main .content .views-field-uid {
+    bottom: 19%;
+    right: 5%; }
+  .main .content .views-field-like-and-dislike {
+    padding: 10px;
+    position: relative;
+    bottom: 2rem; } }
+
+@media screen and (min-width: 427px) and (max-width: 769px) {
+  .main .content .hovercontent {
+    display: block; }
+  .main .content .views-field-title {
+    width: 98%;
+    position: relative;
+    bottom: 2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px; }
+  .main .content .views-field-body p {
+    width: 93.8%;
+    position: relative;
+    text-align: justify;
+    bottom: 50px;
+    height: 80px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); }
+  .main .content .views-field-view-node {
+    bottom: 19%; }
+  .main .content .views-field-uid {
+    bottom: 19%;
+    right: 5%; }
+  .main .content .views-field-like-and-dislike {
+    padding: 10px;
+    position: relative;
+    bottom: 2rem; } }
+
+@media screen and (min-width: 427px) and (max-width: 769px) {
+  .views-view-grid.horizontal.cols-3.clearfix {
+    display: flex;
+    justify-content: space-evenly; } }
+
 .owl-item {
   width: 340px !important; }
 
@@ -209,3 +328,99 @@ button#gridicon.show {
   position: relative;
   left: 15%;
   width: 70%; }
+
+@media screen and (max-width: 426px) {
+  .top_navigation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center; }
+    .top_navigation .secondary input#edit-submit {
+      margin-left: 3px;
+      padding: 5px 6px;
+      background-color: lightskyblue;
+      color: white;
+      border: none;
+      font-weight: 800;
+      font-size: 10px; }
+    .top_navigation .secondary input#edit-keys {
+      height: 21px; } }
+
+@media screen and (max-width: 426px) {
+  .header .site_branding #block-custom-theme-branding a img {
+    height: 34px; } }
+
+.footer {
+  padding: unset;
+  width: 100%; }
+  @media screen and (max-width: 426px) {
+    .footer {
+      display: block;
+      padding: unset; }
+      .footer .footer1 {
+        width: 95%;
+        padding: 20px 0px 20px 20px; } }
+
+@media screen and (max-width: 426px) {
+  .header .main_navigation ul.menu {
+    list-style: none;
+    font-size: 18px;
+    background: cadetblue;
+    height: 11rem;
+    right: 0%;
+    width: 100%;
+    bottom: 68%;
+    text-align: center;
+    position: fixed;
+    display: none; }
+    .header .main_navigation ul.menu.show {
+      display: block; } }
+
+@media screen and (min-width: 427px) and (max-width: 769px) {
+  .header .main_navigation ul.menu {
+    list-style: none;
+    font-size: 18px;
+    background: cadetblue;
+    height: 11rem;
+    right: 0%;
+    width: 100%;
+    bottom: 68%;
+    text-align: center;
+    position: fixed;
+    display: none; }
+    .header .main_navigation ul.menu.show {
+      display: block; } }
+
+.header .main_navigation .hamburger {
+  display: none; }
+  @media screen and (max-width: 426px) {
+    .header .main_navigation .hamburger {
+      display: block;
+      font-size: 21px;
+      background: transparent;
+      border: none;
+      color: white;
+      position: absolute;
+      top: 20%;
+      right: 10%;
+      z-index: 10; } }
+  @media screen and (min-width: 427px) and (max-width: 769px) {
+    .header .main_navigation .hamburger {
+      display: block;
+      font-size: 21px;
+      background: transparent;
+      border: none;
+      color: white;
+      position: absolute;
+      top: 20%;
+      right: 10%;
+      z-index: 10; } }
+
+@media screen and (max-width: 426px) {
+  .header .site_branding {
+    margin-right: 40%;
+    margin-left: -6%; } }
+
+@media screen and (min-width: 427px) and (max-width: 769px) {
+  .header .site_branding {
+    margin-right: 73%; } }

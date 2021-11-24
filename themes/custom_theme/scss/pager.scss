@@ -11,6 +11,9 @@ nav.pager {
                 padding: 10px;
                 font-weight: 700;
                 text-decoration: none;
+                @include mobile {
+                    font-size: 11px;
+                }
             }
         }
     }
@@ -23,10 +26,27 @@ a.feed-icon {
 .main .content select.form-select {
     font-size: 14px;
     position: relative;
-    right: 131%;
+    right: 60%;
     top: 1px;
     width: 195px;
     height: 29px;
+    @include mobile {
+        font-size: 11px;
+        right: -27%;
+        top: -4px;
+        width: 114px;
+        height: 28px;
+    }
+    @include tablet {
+        position: relative;
+        right: 4%;
+        top: 2px;
+        height: 25px;
+    }
+}
+
+.main .content .js-form-item label {
+    left: 10.5%;
 }
 
 .main .content .button.js-form-submit.form-submit {
@@ -34,8 +54,17 @@ a.feed-icon {
     position: relative;
     // top: 0%;
     // left: 25%;
-    right: 1240%;
+    right: 912%;
     background-color: cadetblue;
     color: white;
     font-weight: 700;
+    @include mobile {
+        right: 19%;
+        bottom: 3px;
+    }
+    @include tablet {
+        padding: 1.5px;
+        position: relative;
+        right: 392%;
+    }
 }

@@ -1,7 +1,23 @@
+@mixin mobile {
+    @media screen and (max-width: 426px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and(min-width: 427px) and(max-width: 769px) {
+        @content;
+    }
+}
+
 .sortcontent {
     text-align: right;
     margin-right: 5%;
     font-size: 23px;
+    display: none;
+    @include mobile {
+        display: none;
+    }
     .gridicon {
         font-weight: 700;
         margin-right: 5%;
@@ -56,4 +72,116 @@ button#gridicon {
 
 button#gridicon.show {
     display: block;
+}
+
+.container {
+    @include mobile {
+        margin: unset;
+    }
+}
+
+.blog .views-col {
+    @include mobile {
+        width: 100% !important;
+    }
+    @include tablet {
+        width: unset !important;
+    }
+}
+
+.featured {
+    @include mobile {
+        display: none;
+    }
+}
+
+.aboutus {
+    @include mobile {
+        display: none;
+    }
+}
+
+.main .content {
+    @include mobile {
+        .js-form-item label {
+            font-size: 18px;
+            left: 4.5%;
+        }
+    }
+}
+
+.main .content {
+    @include mobile {
+        .hovercontent {
+            display: block;
+        }
+        .views-field-title {
+            width: 98%;
+            position: relative;
+            bottom: 2px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            border-top-right-radius: 15px;
+            border-top-left-radius: 15px;
+        }
+        .views-field-body p {
+            width: 93.8%;
+            position: relative;
+            text-align: justify;
+            bottom: 50px;
+            height: 80px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        .views-field-view-node {
+            bottom: 19%;
+        }
+        .views-field-uid {
+            bottom: 19%;
+            right: 5%;
+        }
+        .views-field-like-and-dislike {
+            padding: 10px;
+            position: relative;
+            bottom: 2rem;
+        }
+    }
+    @include tablet {
+        .hovercontent {
+            display: block;
+        }
+        .views-field-title {
+            width: 98%;
+            position: relative;
+            bottom: 2px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            border-top-right-radius: 15px;
+            border-top-left-radius: 15px;
+        }
+        .views-field-body p {
+            width: 93.8%;
+            position: relative;
+            text-align: justify;
+            bottom: 50px;
+            height: 80px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        .views-field-view-node {
+            bottom: 19%;
+        }
+        .views-field-uid {
+            bottom: 19%;
+            right: 5%;
+        }
+        .views-field-like-and-dislike {
+            padding: 10px;
+            position: relative;
+            bottom: 2rem;
+        }
+    }
+}
+
+.views-view-grid.horizontal.cols-3.clearfix {
+    @include tablet {
+        display: flex;
+        justify-content: space-evenly;
+    }
 }

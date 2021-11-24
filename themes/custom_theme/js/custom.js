@@ -15,3 +15,10 @@ gridicon.addEventListener('click', () => {
     gridicon.classList.remove('show');
     listicon.classList.remove('hide');
 });
+
+var humburger = document.getElementById('hamburger');
+
+hamburger.addEventListener('click', () => {
+    document.querySelector("ul.menu").classList.toggle('show');
+
+});
