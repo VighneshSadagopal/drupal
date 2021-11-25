@@ -8,6 +8,7 @@ screenshot: 'visual_select.jpg'
 
 libraries:
   - custom_theme/global-styling
+  - custom_theme/navscroll
 
 regions:
   secondary_navigation : 'Secondary_Navigation'
@@ -17,8 +18,9 @@ regions:
   banner : 'Banner'
   content: Content
   aboutus: 'About Us'
-  featured : 'Featured Post'
   sidebar : 'Sidebar Right'
+  featured : 'Featured Post'
+ 
   footer1: 'Footer First'
   footer2: 'Footer Second'
   footer3: 'Footer Third'

@@ -1,6 +1,6 @@
 uuid: c785d870-f94e-4475-a5a3-2e721fec5dea
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - system
@@ -10,8 +10,8 @@ _core:
   default_config_hash: 7W5m1cGZjEB4_o0Di0lrmtWuUx1Wft0TuAVyUSgPUwQ
 id: visual_content
 theme: visual
-region: main_navigation
-weight: -3
+region: content
+weight: -9
 provider: null
 plugin: system_main_block
 settings:

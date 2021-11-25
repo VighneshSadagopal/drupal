@@ -1,4 +1,4 @@
-uuid: 3d0c8456-a7fe-4f06-b564-2371df3b16b0
+uuid: 4a44785e-f164-4b44-bf42-eb4e18704736
 langcode: en
 status: true
 dependencies:
@@ -6,11 +6,11 @@ dependencies:
     - search
     - system
   theme:
-    - visual
-id: visual_searchform
-theme: visual
-region: search
-weight: -8
+    - custome_theme
+id: custome_theme_searchform
+theme: custome_theme
+region: secondary_navigation
+weight: -9
 provider: null
 plugin: search_form_block
 settings:

@@ -1,0 +1,25 @@
+uuid: e5c5eeef-f21b-48b9-ae4e-ecd8af5dd23b
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:c76a1d9d-2504-44bb-be2b-22ea47fccf27'
+  module:
+    - block_content
+  theme:
+    - custom_theme
+id: custom_theme_aboutus
+theme: custom_theme
+region: main_navigation
+weight: -6
+provider: null
+plugin: 'block_content:c76a1d9d-2504-44bb-be2b-22ea47fccf27'
+settings:
+  id: 'block_content:c76a1d9d-2504-44bb-be2b-22ea47fccf27'
+  label: 'ABOUT US'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

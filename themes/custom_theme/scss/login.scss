@@ -1,20 +1,55 @@
 #block-custom-theme-content {
     #user-login-form {
-        width: 65%;
-        position: relative;
-        left: 17%;
+        position: absolute;
+        top: 48%;
+        text-align: center;
+        left: 24%;
+        @include mobile {
+            top: 19%;
+            left: 0%;
+        }
+        @include tablet {
+            top: 38%;
+            left: 8%;
+        }
         .js-form-type-textfield {
             margin: 10px;
             label {
-                position: unset;
-                margin-right: 10px;
+                display: none;
+            }
+            input#edit-name {
+                padding: 12px 57px;
+                font-size: 15px;
+                @include mobile {
+                    padding: 5px 16px;
+                    font-size: 11px;
+                    width: 28%;
+                }
+                @include tablet {
+                    padding: 12px 36px;
+                    font-size: 15px;
+                    width: 45%;
+                }
             }
         }
         .js-form-type-password {
             margin: 10px;
             label {
-                position: unset;
-                margin-right: 15px;
+                display: none;
+            }
+            input#edit-pass {
+                padding: 12px 57px;
+                font-size: 15px;
+                @include mobile {
+                    padding: 5px 16px;
+                    font-size: 11px;
+                    width: 28%;
+                }
+                @include tablet {
+                    padding: 12px 36px;
+                    font-size: 15px;
+                    width: 45%;
+                }
             }
         }
         .js-form-type-checkbox {
@@ -25,8 +60,28 @@
                 font-size: 15px;
                 position: unset;
                 margin-right: 10px;
+                color: white;
             }
         }
+        .button.js-form-submit.form-submit {
+            position: relative;
+            right: 0%;
+            height: 29px;
+            top: -26px;
+            width: 97%;
+            @include mobile {
+                width: 35%;
+            }
+            @include tablet {
+                width: 55%;
+            }
+        }
+    }
+}
+
+.about {
+    div {
+        background-color: black;
     }
 }
 

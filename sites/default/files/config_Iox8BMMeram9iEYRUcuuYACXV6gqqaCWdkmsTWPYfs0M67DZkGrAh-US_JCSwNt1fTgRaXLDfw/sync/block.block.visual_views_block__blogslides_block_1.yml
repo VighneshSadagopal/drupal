@@ -11,7 +11,7 @@ dependencies:
 id: visual_views_block__blogslides_block_1
 theme: visual
 region: main_navigation
-weight: -6
+weight: -4
 provider: null
 plugin: 'views_block:blogslides-block_1'
 settings:

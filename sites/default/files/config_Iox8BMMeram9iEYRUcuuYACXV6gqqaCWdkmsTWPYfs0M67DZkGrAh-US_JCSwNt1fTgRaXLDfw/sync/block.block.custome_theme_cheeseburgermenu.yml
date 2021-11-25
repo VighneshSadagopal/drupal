@@ -1,0 +1,59 @@
+uuid: 71bbfba8-327c-4eff-9811-cdc69abdc266
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - cheeseburger_menu
+  theme:
+    - custome_theme
+id: custome_theme_cheeseburgermenu
+theme: custome_theme
+region: main_navigation
+weight: 0
+provider: null
+plugin: cheeseburger_menu
+settings:
+  id: cheeseburger_menu
+  label: 'Cheeseburger menu'
+  provider: cheeseburger_menu
+  label_display: visible
+  default_css: true
+  default_js: true
+  show_navigation: true
+  parent_menu_as_link: true
+  hidden: true
+  invoke_hooks: false
+  left_side_background_color: '#464b4e'
+  left_side_text_color: '#ffffff'
+  right_side_background_color: '#ffffff'
+  right_side_text_color: '#000000'
+  trigger_color: '#0723b0'
+  trigger_background_color: '#43def9'
+  scrollbar_color: '#b4f5fd'
+  menus:
+    main:
+      weight: -99
+      settings:
+        show_links_in_navigation: true
+        max_depth: 1
+        initial_visibility_level: 6
+        default_expanded: false
+        show_title_in_navigation: true
+        show_title_above_menu: true
+        collapsible_title: true
+        title_override: ''
+        icon: ''
+        title_default_expanded: false
+        override_title: false
+      menu_type: menu
+      id: main
+  left_side_background_opacity: '1'
+  left_side_text_opacity: '1'
+  right_side_background_opacity: '1'
+  right_side_text_opacity: '1'
+  trigger_opacity: '1'
+  trigger_background_opacity: '1'
+  scrollbar_opacity: '1'
+visibility: {  }

@@ -4,12 +4,12 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_content_image
-    - image.style.newstyl
+    - image.style.carousel
   module:
     - image
     - node
+    - owlcarousel
     - user
-    - views_slideshow
     - votingapi
 id: most_liked
 label: 'Most Liked'
@@ -56,9 +56,42 @@ display:
           items_per_page: 0
           offset: 0
       style:
-        type: slideshow
+        type: owlcarousel
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          items: '3'
+          itemsDesktop: '[1199,3]'
+          itemsDesktopSmall: '[979,3]'
+          itemsTablet: '[768,2]'
+          itemsMobile: '[479,1]'
+          singleItem: 0
+          itemsScaleUp: 1
+          slideSpeed: '200'
+          paginationSpeed: '540'
+          rewindSpeed: '1000'
+          autoPlay: 1
+          stopOnHover: 0
+          navigation: 0
+          prevText: prev
+          nextText: next
+          rewindNav: 1
+          scrollPerPage: 0
+          pagination: 0
+          paginationNumbers: 0
+          responsive: 1
+          responsiveRefreshRate: '200'
+          mouseDrag: 1
+          touchDrag: 1
+          transitionStyle: fadeUp
       row:
         type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       fields:
         title:
           id: title
@@ -158,7 +191,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: newstyl
+            image_style: carousel
             image_link: ''
           group_column: ''
           group_columns: {  }

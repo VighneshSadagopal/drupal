@@ -1,4 +1,4 @@
-uuid: d7d99dc0-1af3-41d1-b6d5-ce5d4ed1fe77
+uuid: 1fe0c02b-f118-48fa-8b72-28bf3960e83b
 langcode: en
 status: false
 dependencies:
@@ -7,9 +7,9 @@ dependencies:
   module:
     - cheeseburger_menu
   theme:
-    - visual
-id: cheeseburgermenutrigger
-theme: visual
+    - custome_theme
+id: custome_theme_cheeseburgermenutrigger
+theme: custome_theme
 region: main_navigation
 weight: 0
 provider: null

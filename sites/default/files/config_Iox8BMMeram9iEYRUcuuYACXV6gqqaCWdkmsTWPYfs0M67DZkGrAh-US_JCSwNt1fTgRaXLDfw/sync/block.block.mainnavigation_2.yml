@@ -1,0 +1,25 @@
+uuid: 2da1ba6b-580a-418d-9d84-3e7c4ceddf0b
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - visual
+id: mainnavigation_2
+theme: visual
+region: footer2
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Useful links'
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

@@ -1,0 +1,131 @@
+footer div {
+    display: none;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.layout.layout--onecol {
+    position: relative;
+    left: 3%;
+}
+
+article {
+    margin: 77px 0px 12px 60px;
+    width: 60%;
+    left: 3%;
+    margin-bottom: 10px;
+    span {
+        font-size: 31px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: 700;
+    }
+    img {
+        margin-bottom: 10px;
+    }
+    margin-bottom: 17px;
+    a {
+        position: relative;
+        color: grey;
+        text-decoration: none;
+        font-size: 20px;
+    }
+    p {
+        position: relative;
+        top: 20px;
+        text-align: justify;
+        font-size: 20px;
+        font-family: sans-serif;
+        margin-top: 10px;
+    }
+    .vote-widget.vote-widget--like-and-dislike {
+        position: relative;
+        padding: 30px 0px;
+        span {
+            font-size: 20px;
+            top: 6px;
+        }
+    }
+    li.blog-usernames-blog {
+        position: relative;
+        list-style: none;
+        left: 84%;
+        bottom: 24px;
+        font-size: 20px;
+        a {
+            color: grey;
+            text-decoration: none;
+        }
+    }
+    .js-form-item label {
+        display: none;
+    }
+    input#edit-subject-0-value {
+        display: none;
+    }
+    span#cke_10_text {
+        top: 0px;
+    }
+    .filter-wrapper {
+        display: none;
+    }
+    .flag.flag-subscribe-node.action-flag a {
+        text-decoration: none;
+        font-size: 18px;
+        color: white;
+        background: cadetblue;
+        padding: 7px 13px;
+    }
+    .flag.flag-bookmark.action-flag {
+        margin-top: 19px;
+        a {
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            background: cadetblue;
+            padding: 7px 11px;
+        }
+    }
+    input#edit-submit {
+        left: 81%;
+        right: unset;
+        bottom: 27px !important;
+        top: unset !important;
+        height: 26px !important;
+    }
+    .button.js-form-submit.form-submit {
+        left: 82%;
+        bottom: 27px !important;
+        padding: revert;
+        border: none;
+        height: 26px;
+    }
+}
+
+.sidebar {
+    position: absolute;
+    top: 18%;
+    right: 2%;
+    .views-field-field-content-image {
+        background-color: black;
+        width: fit-content;
+        img {
+            opacity: 65%;
+        }
+    }
+    .views-field.views-field-title {
+        font-size: 15px;
+        position: relative;
+        bottom: 48px;
+        width: 70%;
+        padding: 5px;
+        margin-bottom: -10px;
+        a {
+            text-decoration: none;
+            color: white;
+            font-weight: 800;
+        }
+    }
+}

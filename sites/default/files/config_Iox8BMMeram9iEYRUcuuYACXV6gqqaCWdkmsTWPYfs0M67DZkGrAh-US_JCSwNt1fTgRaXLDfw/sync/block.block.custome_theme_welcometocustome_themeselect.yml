@@ -1,0 +1,30 @@
+uuid: 7cd91a38-bf57-4cf8-a49c-04564dea87b8
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:ec6b8453-f097-4c76-8c9b-b05a1fb94255'
+  module:
+    - block_content
+    - system
+  theme:
+    - custome_theme
+id: custome_theme_welcometocustome_themeselect
+theme: custome_theme
+region: main_navigation
+weight: -8
+provider: null
+plugin: 'block_content:ec6b8453-f097-4c76-8c9b-b05a1fb94255'
+settings:
+  id: 'block_content:ec6b8453-f097-4c76-8c9b-b05a1fb94255'
+  label: 'Welcome to Visual Select'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "/profile-info\r\n/gallery\r\n/error404"
+    negate: true

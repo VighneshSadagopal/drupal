@@ -8,6 +8,7 @@ screenshot: 'visual_select.jpg'
 
 libraries:
   - visual/global-styling
+ 
 
 regions:
   secondary_navigation : 'Secondary_Navigation'

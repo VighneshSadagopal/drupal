@@ -1,0 +1,25 @@
+uuid: c54c7613-8054-4acc-b6e9-c7c19ccdb33f
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - custom_theme
+id: custom_theme_mainnavigation_2
+theme: custom_theme
+region: footer2
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Useful links'
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

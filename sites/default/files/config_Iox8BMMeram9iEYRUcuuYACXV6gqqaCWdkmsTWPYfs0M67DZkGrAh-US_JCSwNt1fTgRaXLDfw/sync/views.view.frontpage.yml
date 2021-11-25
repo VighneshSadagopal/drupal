@@ -4,16 +4,15 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.rss
-    - core.entity_view_mode.node.teaser
     - field.storage.node.body
     - field.storage.node.field_content_image
+    - responsive_image.styles.blog_350_x_400_
   module:
-    - image
     - like_and_dislike
     - node
+    - responsive_image
     - text
     - user
-    - views_add_button
 _core:
   default_config_hash: HAnuLuk87TQ6QDwuJNjLTJYoBftdp6XtJh8RdBx3-TY
 id: frontpage
@@ -74,8 +73,8 @@ display:
           submit_button: Apply
           reset_button: false
           reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
+          exposed_sorts_label: 'Sort by :'
+          expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
       filters:
@@ -177,15 +176,15 @@ display:
       pager:
         type: full
         options:
-          items_per_page: 4
+          items_per_page: 6
           offset: 0
           id: 0
           total_pages: 0
           tags:
-            previous: ..
-            next: ..
-            first: ..
-            last: ..
+            previous: ''
+            next: ''
+            first: ''
+            last: ''
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -204,10 +203,12 @@ display:
           query_comment: ''
           query_tags: {  }
       row:
-        type: 'entity:node'
+        type: fields
         options:
-          relationship: none
-          view_mode: teaser
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       sorts:
         uid:
           id: uid
@@ -254,48 +255,15 @@ display:
         type: grid
         options:
           grouping: {  }
-          columns: 2
+          columns: 3
           automatic_width: true
           alignment: horizontal
           col_class_default: true
-          col_class_custom: ''
+          col_class_custom: blog
           row_class_default: true
-          row_class_custom: ''
+          row_class_custom: blog
       title: ''
-      header:
-        views_add_button:
-          id: views_add_button
-          table: views
-          field: views_add_button
-          plugin_id: views_add_button_area
-        views_add_button_1:
-          id: views_add_button_1
-          table: views
-          field: views_add_button
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: 0
-          type: node+blog_post
-          render_plugin: ''
-          access_plugin: ''
-          context: ''
-          button_text: 'Create Post'
-          button_classes: ''
-          button_attributes: ''
-          button_access_denied:
-            value: ''
-            format: basic_html
-          button_prefix:
-            value: ''
-            format: basic_html
-          button_suffix:
-            value: ''
-            format: basic_html
-          query_string: ''
-          destination: 1
-          plugin_id: views_add_button_area
+      header: {  }
       footer: {  }
       relationships: {  }
       fields:
@@ -340,17 +308,17 @@ display:
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
+          element_wrapper_type: div
+          element_wrapper_class: blog_image
           element_default_classes: true
           empty: ''
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: image
+          type: responsive_image
           settings:
-            image_style: ''
+            responsive_image_style: blog_350_x_400_
             image_link: ''
           group_column: ''
           group_columns: {  }
@@ -374,7 +342,7 @@ display:
           exclude: false
           alter:
             alter_text: false
-            text: ''
+            text: "<div class =\"hovercontent\">\r\n<br>{{title}}</br>\r\n<br>{{rows}}</br>\r\n<br>{{view-node}}</br>\r\n<br>{{fields.author.user.name}}</br>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -401,11 +369,11 @@ display:
             html: false
           element_type: ''
           element_class: ''
-          element_label_type: ''
+          element_label_type: div
           element_label_class: ''
           element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
+          element_wrapper_type: div
+          element_wrapper_class: hovercontent
           element_default_classes: true
           empty: ''
           hide_empty: false
@@ -469,8 +437,8 @@ display:
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
+          element_wrapper_type: div
+          element_wrapper_class: hovercontent
           element_default_classes: true
           empty: ''
           hide_empty: false
@@ -479,7 +447,7 @@ display:
           click_sort_column: value
           type: text_trimmed
           settings:
-            trim_length: 100
+            trim_length: 90
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -491,56 +459,6 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        like_and_dislike:
-          id: like_and_dislike
-          table: node
-          field: like_and_dislike
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          entity_type: node
-          plugin_id: like_and_dislike
         view_node:
           id: view_node
           table: node_field_revision
@@ -582,8 +500,8 @@ display:
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
+          element_wrapper_type: div
+          element_wrapper_class: hovercontent
           element_default_classes: true
           empty: ''
           hide_empty: false
@@ -635,8 +553,8 @@ display:
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
+          element_wrapper_type: div
+          element_wrapper_class: hovercontent
           element_default_classes: true
           empty: ''
           hide_empty: false
@@ -659,6 +577,56 @@ display:
           entity_type: node
           entity_field: uid
           plugin_id: field
+        like_and_dislike:
+          id: like_and_dislike
+          table: node
+          field: like_and_dislike
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          entity_type: node
+          plugin_id: like_and_dislike
       arguments: {  }
       display_extenders: {  }
       filter_groups:
@@ -676,7 +644,6 @@ display:
         - 'languages:language_interface'
         - url.query_args
         - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - 'user.node_grants:view'
         - user.permissions
       max-age: -1
@@ -690,6 +657,7 @@ display:
     position: 3
     display_options:
       display_extenders: {  }
+      enabled: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -697,7 +665,6 @@ display:
         - 'languages:language_interface'
         - url.query_args
         - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -736,7 +703,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - 'user.node_grants:view'
         - user.permissions
       max-age: -1
@@ -762,7 +728,6 @@ display:
         - 'languages:language_interface'
         - url.query_args
         - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - 'user.node_grants:view'
         - user.permissions
       max-age: -1

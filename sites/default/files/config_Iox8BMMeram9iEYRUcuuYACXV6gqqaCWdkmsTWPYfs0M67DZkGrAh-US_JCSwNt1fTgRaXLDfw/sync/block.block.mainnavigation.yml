@@ -1,4 +1,4 @@
-uuid: b9a5d77e-c5f7-4921-9ce6-57222db70df5
+uuid: 8483231d-66d4-4008-8e7d-4a61bf856590
 langcode: en
 status: true
 dependencies:
@@ -8,12 +8,10 @@ dependencies:
     - system
   theme:
     - visual
-_core:
-  default_config_hash: GuTbIyii0zho7w87nlUzB6VdN_NDk90_bI5WLODkZ8U
-id: visual_main_menu
+id: mainnavigation
 theme: visual
 region: main_navigation
-weight: -7
+weight: 0
 provider: null
 plugin: 'system_menu_block:main'
 settings:
@@ -22,10 +20,6 @@ settings:
   provider: system
   label_display: '0'
   level: 1
-  depth: 4
+  depth: 0
   expand_all_items: true
-visibility:
-  request_path:
-    id: request_path
-    pages: /error404
-    negate: true
+visibility: {  }

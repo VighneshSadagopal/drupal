@@ -1,0 +1,41 @@
+uuid: 8bfa9319-da7c-463b-b38c-23f226ea2a91
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:cd950e1b-53f9-4f01-b1a3-231737b75c17'
+  module:
+    - block_content
+    - system
+    - user
+  theme:
+    - custom_theme
+id: login_banner
+theme: custom_theme
+region: banner
+weight: 0
+provider: null
+plugin: 'block_content:cd950e1b-53f9-4f01-b1a3-231737b75c17'
+settings:
+  id: 'block_content:cd950e1b-53f9-4f01-b1a3-231737b75c17'
+  label: Login_Banner
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: /user/login
+    negate: false
+  user_role:
+    id: user_role
+    roles:
+      anonymous: anonymous
+      authenticated: authenticated
+      administrator: administrator
+      author: author
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

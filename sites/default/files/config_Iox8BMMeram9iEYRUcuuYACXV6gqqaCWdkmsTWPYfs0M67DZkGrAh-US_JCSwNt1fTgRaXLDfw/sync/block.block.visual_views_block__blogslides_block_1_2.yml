@@ -1,6 +1,6 @@
 uuid: 8beb4d2d-f2a2-47cf-97ba-4db4cdc45b32
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - views.view.blogslides

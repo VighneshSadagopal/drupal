@@ -1,0 +1,20 @@
+uuid: be24318b-83cb-42f0-a9aa-b102da42637c
+langcode: en
+status: false
+dependencies:
+  module:
+    - language
+  theme:
+    - custom_theme
+id: languageswitcher
+theme: custom_theme
+region: search
+weight: 0
+provider: null
+plugin: 'language_block:language_interface'
+settings:
+  id: 'language_block:language_interface'
+  label: 'Language switcher'
+  provider: language
+  label_display: '0'
+visibility: {  }

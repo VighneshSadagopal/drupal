@@ -1,0 +1,25 @@
+uuid: 52ba2572-a0c2-40e8-bd02-140a2a2340a0
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:2ea1c135-4d6c-436e-a639-d94dad3e21a2'
+  module:
+    - block_content
+  theme:
+    - visual
+id: footeraboutus_2
+theme: visual
+region: footer2
+weight: 0
+provider: null
+plugin: 'block_content:2ea1c135-4d6c-436e-a639-d94dad3e21a2'
+settings:
+  id: 'block_content:2ea1c135-4d6c-436e-a639-d94dad3e21a2'
+  label: footer-aboutus
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

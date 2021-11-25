@@ -1,0 +1,16 @@
+uuid: 9ba7a521-f15e-412f-97ec-0c62e0f62225
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.blog
+id: blog_350_x_400_
+label: 'blog (350 x 400)'
+image_style_mappings:
+  -
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: blog
+breakpoint_group: responsive_image
+fallback_image_style: blog

@@ -7,14 +7,20 @@ dependencies:
     - field.field.node.blog_post.field_blog_comments
     - field.field.node.blog_post.field_blog_tags
     - field.field.node.blog_post.field_content_image
-    - field.field.node.blog_post.layout_builder__layout
     - image.style.thumbnail
     - node.type.blog_post
   module:
     - comment
+    - field_layout
     - image
+    - layout_discovery
     - path
     - text
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: Z1OP8l2rKnyxN-BPDMTcsu3jDVLuR5bowjDwQpUkt_0
 id: node.blog_post.default
@@ -118,5 +124,4 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
-hidden:
-  layout_builder__layout: true
+hidden: {  }

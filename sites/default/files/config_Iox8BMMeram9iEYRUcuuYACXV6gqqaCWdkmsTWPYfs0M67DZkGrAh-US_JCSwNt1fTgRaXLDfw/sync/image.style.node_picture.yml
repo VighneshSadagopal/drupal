@@ -1,0 +1,15 @@
+uuid: fbce96b9-d478-4c51-8239-2b5d54facc94
+langcode: en
+status: true
+dependencies: {  }
+name: node_picture
+label: 'node picture (640 x 480 )'
+effects:
+  3d8af719-c138-4109-8f59-772ab6726fb3:
+    uuid: 3d8af719-c138-4109-8f59-772ab6726fb3
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 750
+      height: 500
+      anchor: center-center

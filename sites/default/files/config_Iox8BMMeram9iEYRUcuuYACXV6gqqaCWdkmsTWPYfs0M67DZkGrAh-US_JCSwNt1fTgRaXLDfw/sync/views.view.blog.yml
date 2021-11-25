@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.node.body
     - field.storage.node.field_content_image
+    - image.style.media_library
     - node.type.blog_post
   module:
     - image
@@ -254,7 +255,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: ''
+            image_style: media_library
             image_link: ''
           group_column: ''
           group_columns: {  }

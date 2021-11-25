@@ -9,3 +9,15 @@ global-styling:
     js/custom.js: {}
   dependencies:
     - core/jquery
+
+front :
+  version: VERSION
+  js:
+    js/frontnav.js: {}
+  dependencies:
+    - core/jquery
+    
+navscroll:
+  version: VERSION
+  js:
+    js/navscroll.js: {}

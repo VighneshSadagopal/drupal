@@ -1,6 +1,6 @@
 uuid: bffdabcc-e341-4b1b-af9b-9839eba47037
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - views.view.most_liked
@@ -25,5 +25,5 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "/error404\r\n/form/*"
-    negate: true
+    pages: '<front>'
+    negate: false

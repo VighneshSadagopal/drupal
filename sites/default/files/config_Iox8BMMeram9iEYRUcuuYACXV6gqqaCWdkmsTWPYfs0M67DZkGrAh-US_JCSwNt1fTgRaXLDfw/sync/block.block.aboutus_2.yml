@@ -1,0 +1,25 @@
+uuid: 646d057b-0e77-481e-bcc7-cfca2ec2a5c6
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:c76a1d9d-2504-44bb-be2b-22ea47fccf27'
+  module:
+    - block_content
+  theme:
+    - visual
+id: aboutus_2
+theme: visual
+region: secondary_navigation
+weight: 0
+provider: null
+plugin: 'block_content:c76a1d9d-2504-44bb-be2b-22ea47fccf27'
+settings:
+  id: 'block_content:c76a1d9d-2504-44bb-be2b-22ea47fccf27'
+  label: 'ABOUT US'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

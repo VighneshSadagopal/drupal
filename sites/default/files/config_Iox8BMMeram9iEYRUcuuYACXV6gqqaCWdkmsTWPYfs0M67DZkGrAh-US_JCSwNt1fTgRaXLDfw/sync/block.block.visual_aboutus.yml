@@ -11,7 +11,7 @@ dependencies:
 id: visual_aboutus
 theme: visual
 region: main_navigation
-weight: -7
+weight: -6
 provider: null
 plugin: 'block_content:c76a1d9d-2504-44bb-be2b-22ea47fccf27'
 settings:

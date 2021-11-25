@@ -1,0 +1,20 @@
+uuid: 13a20490-1c46-4f89-a565-41d6349fdd8a
+langcode: en
+status: false
+dependencies:
+  module:
+    - language
+  theme:
+    - custome_theme
+id: custome_theme_languageswitcher_2
+theme: custome_theme
+region: main_navigation
+weight: -8
+provider: null
+plugin: 'language_block:language_interface'
+settings:
+  id: 'language_block:language_interface'
+  label: 'Language switcher'
+  provider: language
+  label_display: '0'
+visibility: {  }

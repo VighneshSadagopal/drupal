@@ -1,6 +1,6 @@
 uuid: c283dd70-89d5-4bff-99e0-378a64f15701
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
@@ -8,7 +8,6 @@ dependencies:
     - field.field.node.blog_post.field_blog_comments
     - field.field.node.blog_post.field_blog_tags
     - field.field.node.blog_post.field_content_image
-    - field.field.node.blog_post.layout_builder__layout
     - node.type.blog_post
   module:
     - image
@@ -33,7 +32,7 @@ content:
     type: image
     weight: 0
     region: content
-    label: hidden
+    label: visually_hidden
     settings:
       image_style: ''
       image_link: ''
@@ -62,5 +61,4 @@ hidden:
   field_blog_comments: true
   field_blog_tags: true
   langcode: true
-  layout_builder__layout: true
   links: true

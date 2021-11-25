@@ -5,6 +5,14 @@ dependencies:
   config:
     - field.field.flagging.bookmark.field_body
     - flag.flag.bookmark
+  module:
+    - field_layout
+    - layout_discovery
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 id: flagging.bookmark.default
 targetEntityType: flagging
 bundle: bookmark

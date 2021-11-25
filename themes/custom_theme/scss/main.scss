@@ -10,6 +10,11 @@
     }
 }
 
+.main {
+    margin: unset;
+    display: block;
+}
+
 .sortcontent {
     text-align: right;
     margin-right: 5%;
@@ -183,5 +188,36 @@ button#gridicon.show {
     @include tablet {
         display: flex;
         justify-content: space-evenly;
+    }
+}
+
+.aboutus {
+    background: url(../../../sites/default/files/inline-images/optimistic-people-are-always-late_0.jpg) #00000075;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: darken;
+    position: relative;
+    height: 370px;
+    width: 100%;
+    top: 188%;
+    text-align: center;
+    background-attachment: fixed;
+    margin-top: 15px;
+    h1 {
+        width: 49%;
+        position: relative;
+        left: 25%;
+        top: 2%;
+        color: white;
+        font-family: sans-serif;
+        padding: 7px 13px;
+    }
+    p {
+        position: relative;
+        top: 20%;
+        font-size: 17px;
+        color: white;
+        width: 60%;
+        left: 17.5%;
     }
 }

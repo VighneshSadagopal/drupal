@@ -1,0 +1,15 @@
+uuid: de3d16c1-c9ab-462a-a287-59650607c668
+langcode: en
+status: true
+dependencies: {  }
+name: blog
+label: 'Blog ( 350 x 400 )'
+effects:
+  1c192af4-238f-4a40-9eb8-0c4c7102dccd:
+    uuid: 1c192af4-238f-4a40-9eb8-0c4c7102dccd
+    id: image_scale
+    weight: 1
+    data:
+      width: 380
+      height: 350
+      upscale: false

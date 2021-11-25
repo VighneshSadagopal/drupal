@@ -1,6 +1,6 @@
 uuid: 4f276615-f291-4dfd-8335-3b933f01ab73
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - search
@@ -10,8 +10,8 @@ _core:
   default_config_hash: H4fy02EjLoQ5iUOTd1faLDGjDA-fRuHMMevrKnv9Pdo
 id: visual_searchform_2
 theme: visual
-region: main_navigation
-weight: -8
+region: secondary_navigation
+weight: -9
 provider: null
 plugin: search_form_block
 settings:

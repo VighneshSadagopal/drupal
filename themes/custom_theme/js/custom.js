@@ -22,3 +22,6 @@ hamburger.addEventListener('click', () => {
     document.querySelector("ul.menu").classList.toggle('show');
 
 });
+
+document.getElementById("edit-name").placeholder = "Username";
+document.getElementById("edit-pass").placeholder = "Password";

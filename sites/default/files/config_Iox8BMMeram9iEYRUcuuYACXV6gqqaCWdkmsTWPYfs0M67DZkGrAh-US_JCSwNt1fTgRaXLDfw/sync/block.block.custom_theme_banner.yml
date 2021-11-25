@@ -1,0 +1,41 @@
+uuid: b5d7871a-6645-484d-a911-a26b7ae6deaa
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:01029054-d784-46ff-8b4f-5ca76ff85131'
+  module:
+    - block_content
+    - system
+    - user
+  theme:
+    - custom_theme
+id: custom_theme_banner
+theme: custom_theme
+region: banner
+weight: 0
+provider: null
+plugin: 'block_content:01029054-d784-46ff-8b4f-5ca76ff85131'
+settings:
+  id: 'block_content:01029054-d784-46ff-8b4f-5ca76ff85131'
+  label: Banner
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+  user_role:
+    id: user_role
+    roles:
+      anonymous: anonymous
+      authenticated: authenticated
+      administrator: administrator
+      author: author
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

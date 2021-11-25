@@ -44,3 +44,23 @@
         }
     }
 }
+
+.search {
+    li.menu-item {
+        list-style: none;
+        padding: 7px 15px;
+        &:hover>ul {
+            display: block;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        ul {
+            display: none;
+            background: cadetblue;
+            transition: ease-in-out;
+            position: absolute;
+        }
+    }
+}

@@ -1,0 +1,36 @@
+.hovercontent {
+    display: none;
+    background-color: white;
+    transition: 0.7s;
+    width: 92%;
+    padding: 10px;
+    min-height: 38%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    .title {
+        font-style: normal;
+        font-size: 22px;
+        font-weight: 600;
+        padding-bottom: 11px;
+    }
+    .body {
+        min-height: 54px;
+        font-style: normal;
+    }
+    .clubbed {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 17px;
+        .readmore {
+            a {
+                color: white;
+                text-decoration: none;
+                font-style: normal;
+                padding: 7px 8px;
+                background-color: cadetblue;
+                font-size: 14px;
+            }
+        }
+    }
+}

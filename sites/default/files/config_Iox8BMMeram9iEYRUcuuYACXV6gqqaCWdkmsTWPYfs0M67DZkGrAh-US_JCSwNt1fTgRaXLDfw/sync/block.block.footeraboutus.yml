@@ -1,0 +1,25 @@
+uuid: 1cabb2c3-a7da-496b-b523-d4c7290e8845
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:2ea1c135-4d6c-436e-a639-d94dad3e21a2'
+  module:
+    - block_content
+  theme:
+    - visual
+id: footeraboutus
+theme: visual
+region: footer1
+weight: 0
+provider: null
+plugin: 'block_content:2ea1c135-4d6c-436e-a639-d94dad3e21a2'
+settings:
+  id: 'block_content:2ea1c135-4d6c-436e-a639-d94dad3e21a2'
+  label: 'About Us'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

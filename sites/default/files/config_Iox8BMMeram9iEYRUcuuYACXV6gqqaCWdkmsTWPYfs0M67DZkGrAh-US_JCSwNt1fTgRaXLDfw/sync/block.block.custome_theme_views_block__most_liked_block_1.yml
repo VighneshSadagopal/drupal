@@ -1,0 +1,29 @@
+uuid: d569f6fc-a5f2-4ee8-b849-34febdd101b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.most_liked
+  module:
+    - system
+    - views
+  theme:
+    - custome_theme
+id: custome_theme_views_block__most_liked_block_1
+theme: custome_theme
+region: featured
+weight: -8
+provider: null
+plugin: 'views_block:most_liked-block_1'
+settings:
+  id: 'views_block:most_liked-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
