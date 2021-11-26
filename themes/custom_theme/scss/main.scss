@@ -140,8 +140,10 @@ button#gridicon.show {
             bottom: 19%;
         }
         .views-field-uid {
-            bottom: 19%;
-            right: 5%;
+            position: relative;
+            bottom: 55px;
+            right: 0;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         }
         .views-field-like-and-dislike {
             padding: 10px;
@@ -152,6 +154,10 @@ button#gridicon.show {
     @include tablet {
         .hovercontent {
             display: block;
+            width: 88%;
+        }
+        .views-field-field-content-image {
+            width: 93%;
         }
         .views-field-title {
             width: 98%;
@@ -173,8 +179,10 @@ button#gridicon.show {
             bottom: 19%;
         }
         .views-field-uid {
-            bottom: 19%;
-            right: 5%;
+            position: relative;
+            bottom: 55px;
+            right: 0;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         }
         .views-field-like-and-dislike {
             padding: 10px;
@@ -219,5 +227,9 @@ button#gridicon.show {
         color: white;
         width: 60%;
         left: 17.5%;
+        @include tablet {
+            top: 8%;
+            left: 21.5%;
+        }
     }
 }

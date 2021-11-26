@@ -9,4 +9,5 @@ window.onscroll = function() {
         nav.style.color = "#fff"
         nav.style.borderBottom = "none";
     }
+
 }

@@ -1,5 +1,15 @@
 .owl-item {
     width: 340px !important;
+    .views-field-title {
+        position: relative;
+        top: 29px;
+        left: 10%;
+        font-size: 21px;
+        a {
+            color: white;
+            text-decoration: none;
+        }
+    }
 }
 
 .featured {

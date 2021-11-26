@@ -28,6 +28,11 @@ body {
         padding: 7px 15px; }
         .header .main_navigation ul li:hover > ul {
           display: block; }
+          @media screen and (max-width: 426px) {
+            .header .main_navigation ul li:hover > ul {
+              display: flex;
+              top: 0%;
+              width: fit-content; } }
         .header .main_navigation ul li a {
           text-decoration: none;
           color: white;

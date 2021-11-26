@@ -1,27 +1,12 @@
-var listicon = document.getElementById('listicon');
-var gridicon = document.getElementById('gridicon');
-var gridcontent = document.getElementById('block-custom-theme-content');
-var listcontent = document.getElementById('block-views-block-list-frontpage-block-1');
+(function($) {
 
-listicon.addEventListener('click', () => {
-    gridcontent.classList.add('hide');
-    listcontent.classList.add('show');
-    listicon.classList.add('hide');
-    gridicon.classList.add('show');
-});
-gridicon.addEventListener('click', () => {
-    gridcontent.classList.remove('hide');
-    listcontent.classList.remove('show');
-    gridicon.classList.remove('show');
-    listicon.classList.remove('hide');
-});
+    document.getElementById('hamburger').addEventListener('click', () => {
+        document.querySelector(".main_navigation ul.menu").classList.toggle('show');
+        console.log("hi");
 
-var humburger = document.getElementById('hamburger');
+    });
 
-hamburger.addEventListener('click', () => {
-    document.querySelector("ul.menu").classList.toggle('show');
+    document.getElementById("edit-name").placeholder = "Username";
+    document.getElementById("edit-pass").placeholder = "Password";
 
-});
-
-document.getElementById("edit-name").placeholder = "Username";
-document.getElementById("edit-pass").placeholder = "Password";
+}(jQuery));

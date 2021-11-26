@@ -3,6 +3,21 @@ form#node-blog-post-form {
     label {
         display: none;
     }
+    .form-submit {
+        right: 0;
+        bottom: 0;
+        border-color: rgba(0, 0, 0, 0.192);
+    }
+    input#edit-submit {
+        position: unset;
+        right: 0;
+        height: 29px;
+        padding: revert;
+        top: 0;
+    }
+    .js-form-item .form-item .js-form-type-textfield {
+        padding: 10px;
+    }
     table {
         thead {
             tr {

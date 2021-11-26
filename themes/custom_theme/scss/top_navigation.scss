@@ -46,6 +46,8 @@
 }
 
 .search {
+    text-transform: capitalize;
+    margin-top: 5px;
     li.menu-item {
         list-style: none;
         padding: 7px 15px;
@@ -53,7 +55,8 @@
             display: block;
         }
         a {
-            color: white;
+            color: black;
+            font-weight: 400;
             text-decoration: none;
         }
         ul {

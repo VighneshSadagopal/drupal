@@ -17,6 +17,9 @@
     .body {
         min-height: 54px;
         font-style: normal;
+        @include mobile {
+            font-size: 14px;
+        }
     }
     .clubbed {
         display: flex;

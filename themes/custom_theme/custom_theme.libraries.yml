@@ -1,8 +1,6 @@
 global-styling:
   version: VERSION
   css:
-    component:
-      css/font-awesome.css: {}
     theme:
       css/style.css: {}
   js:
@@ -21,3 +19,4 @@ navscroll:
   version: VERSION
   js:
     js/navscroll.js: {}
+

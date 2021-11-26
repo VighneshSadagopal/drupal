@@ -1,16 +1,31 @@
 #block-custom-theme-content {
     #user-login-form {
         position: absolute;
-        top: 48%;
+        top: 28%;
         text-align: center;
-        left: 24%;
+        right: 5%;
+        width: 30%;
+        height: 60%;
+        background-color: white;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         @include mobile {
-            top: 19%;
-            left: 0%;
+            top: 23%;
+            left: 23%;
+            width: 50%;
+            height: 24%;
+            padding: 10px;
         }
         @include tablet {
-            top: 38%;
-            left: 8%;
+            top: 22%;
+            left: 26%;
+            width: 44%;
+            height: 34%;
+            padding: 10px;
         }
         .js-form-type-textfield {
             margin: 10px;
@@ -18,8 +33,9 @@
                 display: none;
             }
             input#edit-name {
-                padding: 12px 57px;
+                padding: 10px 12px;
                 font-size: 15px;
+                width: 90%;
                 @include mobile {
                     padding: 5px 16px;
                     font-size: 11px;
@@ -38,8 +54,9 @@
                 display: none;
             }
             input#edit-pass {
-                padding: 12px 57px;
+                padding: 10px 12px;
                 font-size: 15px;
+                width: 90%;
                 @include mobile {
                     padding: 5px 16px;
                     font-size: 11px;
@@ -53,14 +70,20 @@
             }
         }
         .js-form-type-checkbox {
-            top: 35px;
+            top: 38px;
             margin: 10px;
             position: relative;
+            text-align: left;
+            left: 7px;
             label {
                 font-size: 15px;
                 position: unset;
                 margin-right: 10px;
-                color: white;
+            }
+            @include tablet {
+                width: fit-content;
+                left: 51px;
+                top: 43px;
             }
         }
         .button.js-form-submit.form-submit {
@@ -68,12 +91,13 @@
             right: 0%;
             height: 29px;
             top: -26px;
-            width: 97%;
+            width: 92%;
+            border: none;
             @include mobile {
                 width: 35%;
             }
             @include tablet {
-                width: 55%;
+                width: 64%;
             }
         }
     }

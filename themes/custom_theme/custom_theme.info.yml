@@ -1,4 +1,4 @@
-name: custome_theme
+name: custom_theme
 type: theme
 base theme: visual
 description: '<p>Visual  light weight modern Drupal 8, 9 theme by Vighnesh <p>'
@@ -9,6 +9,7 @@ screenshot: 'visual_select.jpg'
 libraries:
   - custom_theme/global-styling
   - custom_theme/navscroll
+
 
 regions:
   secondary_navigation : 'Secondary_Navigation'

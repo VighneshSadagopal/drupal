@@ -1,0 +1,4 @@
+<?php
+function custom_theme_form_user_login_form_alter(&$form, $form_state) {
+  $form['user_login_form']['#placeholder'] = t('username');
+}

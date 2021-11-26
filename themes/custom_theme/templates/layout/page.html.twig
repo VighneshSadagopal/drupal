@@ -32,6 +32,9 @@
     <div class="secondary hide" id="secondary">
         {{ page.secondary_navigation }}
     </div>
+    <div class="search">
+    {{ page.search }}
+</div>
 </div>
 <div class="header" id="nav">
     <div class="site_branding">
@@ -43,9 +46,7 @@
         </button>
         {{ page.main_navigation }}
     </div>
-    <div class="search">
-        {{ page.search }}
-    </div>
+   
 </div>
 
 <div class="about">
@@ -53,21 +54,14 @@
 </div>
 <div class="main">
     <div class="content">
-        <div class="sortcontent">
-            <button class="listicon" id="listicon">
-                <i class="fas fa-list"></i>
-            </button>
-            <button class="gridicon" id="gridicon">
-                <i class="fas fa-th"></i>
-            </button>
-        </div>
+        
         {{ page.content }}
 
     </div>
-
-</div>
-<div class="sidebar" id="sidebar">
+    <div class="sidebar" id="sidebar">
     {{ page.sidebar }}
+</div>
+
 </div>
 
 <div class="featured">
